@@ -1,3 +1,23 @@
+create table "customer"(
+	
+	"CUSSEQ" 	number primary key,
+	"CUSID"		varchar2(50) NOT NULL,
+	"PASSWORD" 	NUMBER NOT NULL,
+	"NAME" 		varchar2(50) NOT NULL,
+	"EMAIL"                 varchar2(50) NOT NULL,
+	"PHONE"		varchar2(50) NOT NULL,
+	"JOINDATE" 	DATE DEFAULT SYSDATE
+
+);
+
+--CUSSEQ 시퀀스 설정--
+CREATE SEQUENCE "CUSSEQ" START WITH 1 INCREMENT BY 1 MAXVALUE 99999;
+
+--회원 아이디/이메일 유니크 값 설정--
+ALTER TABLE "CUSTOMER" ADD UNIQUE ("CUSID");
+ALTER TABLE "CUSTOMER" ADD UNIQUE ("EMAIL");
+
+
 -- 주문상세내역 SQL
 CREATE TABLE PURCHASEORDER(
 	PONUM NUMBER PRIMARY KEY,
