@@ -80,3 +80,35 @@ create table "QUERY"(
 	"REGDATE"	DATE DEFAULT sysdate,
 	"REPLY"		varchar2(500)		NOT NULL
 );
+
+
+
+--- 고객센터 문의
+create table CENQUERY(
+OPEN varchar2(20),
+QUERYTYPE varchar2(50),
+CUSID varchar2(20),
+CONTENT varchar2(1000),
+TITLE varchar2(100),
+REGDATE date default sysdate,
+REPLY varchar2(1000)
+);
+
+create sequence "CENQUERYSEQ" start with 1 increment by 1 maxvalue 99999; 
+
+
+--- 제품정보
+create table PRODUCT(
+CATEGORY varchar2(50),
+PRODNAME varchar2(100),
+PRODINFORM varchar2(1000),
+PRICE number notnull,
+DISCOUNT number,
+STOCK NUMBER DEFAULT 9999,
+SHIPPINGCHARGE NUMBER DEFAULT 0,
+REGDATE date default sysdate,
+UPDATEDATE date default sysdate
+);
+
+create sequence "PRODSEQ" start with 1 increment by 1 maxvalue 99999; 
+
