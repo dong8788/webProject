@@ -112,3 +112,19 @@ UPDATEDATE date default sysdate
 
 create sequence "PRODSEQ" start with 1 increment by 1 maxvalue 99999; 
 
+
+---판매자 정보
+create sequence "SELLERSEQ" start with 1 increment by 1 maxvalue 99999;
+
+create table "SELLER"(
+	"SELLERSEQ"	number primary key,
+	"BUSINESSNAME"	varchar2(100) UNIQUE,
+	"NAME" 		varchar2(50),
+	"PHONE"		varchar2(11),
+	"ADDR"		varchar2(50),
+	"EMAIL"		varchar2(20) UNIQUE,
+	"ID"		varchar2(50) UNIQUE,
+	"PASSWORD"	varchar2(50),
+	"JOINDATE"	date default sysdate,
+	"BUSINESSNUM"	nvarchar2(100) UNIQUE
+);

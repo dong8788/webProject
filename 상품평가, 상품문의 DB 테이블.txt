@@ -23,3 +23,6 @@ create table "QUERY"(
 	"REGDATE"	DATE DEFAULT sysdate,
 	"REPLY"		varchar2(500)		NOT NULL
 );
+
+
+
