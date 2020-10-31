@@ -27,3 +27,30 @@ START WITH 1
 MINVALUE 1
 NOMAXVALUE
 NOCYCLE;
+
+-- 공지사항 FAQ 장바구니 테이블
+create sequence "NOTICE_SEQ" start with 1 increment by 1 maxvalue 99999;
+create sequence "FAQ_SEQ" start with 1 increment by 1 maxvalue 99999;
+create sequence "CART_SEQ" start with 1 increment by 1 maxvalue 99999;
+
+create table "NOTICE" (
+    "NOTICESEQ" number primary key,
+    "NOTICECATEGORY" varchar2(10),
+    "CONTENT" varchar2(1000),
+    "TITLE" varchar2(255),
+    "REGDATE" timestamp
+);
+
+create table "FAQ" (
+    "FAQSEQ" number,
+    "FAQCATEGRY" varchar2(10),
+    "QUERY" varchar2(1000),
+    "REPLY" varchar2(1000),
+    "REGDATE" timestamp
+);
+
+create table "CART" (
+    "CUSSEQ" number,
+    "PRODSEQ" varchar2(127),
+    "POQUANTITY" number
+);
