@@ -1,0 +1,56 @@
+-- 주문상세내역 SQL
+CREATE TABLE PURCHASEORDER(
+	PONUM NUMBER PRIMARY KEY,
+	CUSID VARCHAR2(20),
+	PRODSEQ VARCHAR2(20),
+	POQUANTITY NUMBER,
+	PAYNUM NUMBER,
+	RECIPIENT VARCHAR2(20),
+	RECIPIENTPHONE VARCHAR2(20),
+	RECIPIENTADDR VARCHAR2(20),
+	COURIER VARCHAR2(20),
+	SHIPPINGNUM VARCHAR2(20),
+	POSTAT VARCHAR2(20),
+	BILLINGAMOUNT NUMBER,
+	ORORDERDATE DATE DEFAULT SYSDATE,
+	CONFIRMDATE DATE,
+	SHIPDATE DATE,
+	RECIPIENTDATE DATE,
+	FCONFIRMDATE DATE,
+	REJECTDATE DATE,
+	PAYMETHOD VARCHAR2(10)
+);
+-- 주문상세내역 SEQUENCE
+CREATE SEQUENCE PONUM_SEQ
+INCREMENT BY 1
+START WITH 1
+MINVALUE 1
+NOMAXVALUE
+NOCYCLE;
+
+-- 공지사항 FAQ 장바구니 테이블
+create sequence "NOTICE_SEQ" start with 1 increment by 1 maxvalue 99999;
+create sequence "FAQ_SEQ" start with 1 increment by 1 maxvalue 99999;
+create sequence "CART_SEQ" start with 1 increment by 1 maxvalue 99999;
+
+create table "NOTICE" (
+    "NOTICESEQ" number primary key,
+    "NOTICECATEGORY" varchar2(10),
+    "CONTENT" varchar2(1000),
+    "TITLE" varchar2(255),
+    "REGDATE" timestamp
+);
+
+create table "FAQ" (
+    "FAQSEQ" number,
+    "FAQCATEGRY" varchar2(10),
+    "QUERY" varchar2(1000),
+    "REPLY" varchar2(1000),
+    "REGDATE" timestamp
+);
+
+create table "CART" (
+    "CUSSEQ" number,
+    "PRODSEQ" varchar2(127),
+    "POQUANTITY" number
+);

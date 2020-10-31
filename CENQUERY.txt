@@ -1,0 +1,9 @@
+create table CENQUERY(
+  2  OPEN varchar2(20),
+  3  QUERYTYPE varchar2(50),
+  4  CUSID varchar2(20),
+  5  CONTENT varchar2(1000),
+  6  TITLE varchar2(100),
+  7  REGDATE date default sysdate,
+  8  REPLY varchar2(1000)
+  9  );
