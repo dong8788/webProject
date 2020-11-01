@@ -105,6 +105,7 @@ create table "QUERY"(
 
 --- 고객센터 문의
 create table CENQUERY(
+CENQUERYSEQ NUMBER,
 OPEN varchar2(20),
 QUERYTYPE varchar2(50),
 CUSID varchar2(20),
@@ -114,11 +115,13 @@ REGDATE date default sysdate,
 REPLY varchar2(1000)
 );
 
-create sequence "CENQUERYSEQ" start with 1 increment by 1 maxvalue 99999; 
+create sequence "cenqseq" start with 1 increment by 1 maxvalue 99999; 
 
 
 --- 제품정보
 create table PRODUCT(
+PRODSEQ NUMBER,
+SELLERSEQ NUMBER,
 CATEGORY varchar2(50),
 PRODNAME varchar2(100),
 PRODINFORM varchar2(1000),
@@ -130,7 +133,7 @@ REGDATE date default sysdate,
 UPDATEDATE date default sysdate
 );
 
-create sequence "PRODSEQ" start with 1 increment by 1 maxvalue 99999; 
+create sequence "prodseq" start with 1 increment by 1 maxvalue 99999; 
 
 
 ---판매자 정보
