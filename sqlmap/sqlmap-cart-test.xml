@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cartDao">
+        <select id="selectAll" resultType="CartVo">
+                select * from CART order by CUSSEQ
+        </select>
+        
+        <select id="select" parameterType="int" resultType="CartVo">
+                select * from CART where CUSSEQ = #{seq}
+        </select>
+        
+        <insert id="insert" parameterType="CartVo">
+                insert into CART("CUSSEQ", "PRODSEQ", "POQUANTITY")
+					values(#{cusseq}, #{prodseq}, #{poquantity})
+        </insert>
+        
+        <update id="update" parameterType="CartVo">
+                update CART set
+					PRODSEQ = #{prodseq},
+					POQUANTITY = #{poquantity}
+        </update>
+
+        <delete id="delete" parameterType="int">
+                delete from CART where CUSSEQ = #{seq}
+        </delete>
+        
+</mapper>
+
+
+
+

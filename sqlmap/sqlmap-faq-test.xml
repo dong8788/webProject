@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="faqDao">
+        <select id="selectAll" resultType="FaqVo">
+                select * from FAQ order by FAQSEQ
+        </select>
+        
+        <select id="select" parameterType="int" resultType="FaqVo">
+                select * from FAQ where FAQSEQ = #{seq}
+        </select>
+        
+        <insert id="insert" parameterType="FaqVo">
+                insert into FAQ("FAQSEQ", "FAQCATEGORY", "QUERY", "REPLY", "REGDATE")
+					values(FAQ_SEQ.nextval, #{category}, #{query}, #{reply}, SYSDATE)
+        </insert>
+        
+        <update id="update" parameterType="FaqVo">
+                update FAQ set
+					FAQCATEGORY = #{category},
+					QUERY = #{query},
+					REPLY = #{reply},
+					REGDATE = SYSDATE
+        </update>
+
+        <delete id="delete" parameterType="int">
+                delete from FAQ where FAQSEQ = #{seq}
+        </delete>
+        
+</mapper>
+
+
+
+

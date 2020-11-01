@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="noticeDao">
+        <select id="selectAll" resultType="NoticeVo">
+                select * from NOTICE order by NOTICESEQ
+        </select>
+        
+        <select id="select" parameterType="int" resultType="NoticeVo">
+                select * from NOTICE where NOTICESEQ = #{seq}
+        </select>
+        
+        <insert id="insert" parameterType="NoticeVo">
+                insert into NOTICE("NOTICESEQ", "NOTICECATEGORY", "CONTENT", "TITLE", "REGDATE")
+					values(NOTICE_SEQ.nextval, #{category}, #{content}, #{title}, SYSDATE)
+        </insert>
+        
+        <update id="update" parameterType="NoticeVo">
+                update NOTICE set
+					NOTICECATEGORY = #{category},
+					CONTENT = #{content},
+					TITLE = #{title},
+					REGDATE = SYSDATE
+        </update>
+
+        <delete id="delete" parameterType="int">
+                delete from NOTICE where NOTICESEQ = #{seq}
+        </delete>
+        
+</mapper>
+
+
+
+
