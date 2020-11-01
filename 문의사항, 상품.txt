@@ -1,0 +1,58 @@
+--- 문의사항
+
+<insert id="insert">
+	INSERT INTO CENQUERY
+	(CENQUERYSEQ, OPEN, QUERYTYPE, CUSID, CONTENT, TITLE, REGDATE)
+	VALUES (#{cenqseq.NEXTVAL}, #{open}, #{querytype}, #{cusid}, #{content}, #{title}, SYSDATE)
+</insert>
+
+
+<select id="getInfo" resultMap="">
+	SELECT *
+	FROM CENQUERY
+	WHERE CENQUERYSEQ=#{cenqNo}
+</select>
+
+<update id="update">
+	UPDATE CENQUERY
+	SET QUERYTYPE=#{querytype}, CONTENT=#{content}, TITLE=#{title}, REGDATE=SYSDATE
+	WHERE CENQUERYSEQ=#{cenqNo}
+</update>
+
+
+<delete id="delete">
+	DELETE FROM CENQUERY
+	WHERE CENQUERYSEQ=#{cenqNo}
+</delete>
+
+
+
+--- 상품
+
+<insert id="insert">
+	INSERT INTO PRODUCT
+	(PRODSEQ, CATEGORY, PRODNAME, PRODINFORM, PRICE, DISCOUNT, SHIPPINGCHARGE, STOCK NUMBER, REGDATE)
+	VALUES (#{prodseq.NEXTVAL}, #{category}, #{prodname}, #{prodinform}, #{price}, #{disconut},   #{shipcharge}, #{stocknum}, SYSDATE)
+</insert>
+
+
+<select id="getInfo" resultMap="">
+	SELECT *
+	FROM PRODUCT
+	WHERE PRODSEQ=#{prodNo}
+</select>
+
+
+<update id="update">
+	UPDATE CENQUERY
+	SET PRODNAME=#{prodname}, PRODINFORM=#{prodinform}, PRICE=#{price}, DISCOUNT=#{discount}, STOCK NUMBER=#{stocknum}, SHIPPINGCHARGE=#{shipcharge}, REGDATE = SYSDATE
+	WHERE PRODSEQ=#{prodNo}
+</update>
+
+
+<delete id="delete">
+	DELETE FROM CENQUERY
+	WHERE PRODSEQ=#{prodNo}
+</delete>
+
+
