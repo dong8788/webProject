@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="productDao">
+
+
+	<insert id="insert">
+		INSERT INTO PRODUCT
+		(PRODSEQ, CATEGORY, PRODNAME, PRODINFORM, PRICE, DISCOUNT, SHIPPINGCHARGE,
+		STOCK NUMBER, REGDATE)
+		VALUES (#{prodseq.NEXTVAL}, #{category}, #{prodname}, #{prodinform},
+		#{price}, #{disconut}, #{shipcharge}, #{stocknum}, SYSDATE)
+	</insert>
+
+	<select id="selectAll" resultType="ProductVO">
+		SELECT *
+		FROM PRODUCT
+	</select>
+
+
+	<select id="selectOne" resultType="ProductVO">
+		SELECT *
+		FROM PRODUCT
+		WHERE PRODSEQ=#{prodNo}
+	</select>
+
+
+	<update id="update">
+		UPDATE CENQUERY
+		SET PRODNAME=#{prodname}, PRODINFORM=#{prodinform}, PRICE=#{price},
+		DISCOUNT=#{discount}, STOCK NUMBER=#{stocknum},
+		SHIPPINGCHARGE=#{shipcharge}, REGDATE = SYSDATE
+		WHERE PRODSEQ=#{prodNo}
+	</update>
+
+
+	<delete id="delete">
+		DELETE FROM CENQUERY
+		WHERE PRODSEQ=#{prodNo}
+	</delete>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
