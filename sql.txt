@@ -77,30 +77,31 @@ create table "CART" (
     "POQUANTITY" number
 );
 
--- 상품평, 상품문의
+-- 상품평
 create sequence "REVIEWSEQ" start with 1 increment by 1 maxvalue 99999;
 
 create table "REVIEW"(
 	"REVIEWSEQ"	number primary key,
-	"PONUM"		number			NOT NULL,
-	"SCORE"		number			NOT NULL,
-	"TITLE"		varchar2(50)		NOT NULL,
-	"CONTENT"	varchar2(500)		NOT NULL,
-	"REGDATE"	DATE DEFAULT sysdate
+	"PONUM"	number
+	"SCORE"		number		NOT NULL,
+	"TITLE"		varchar2(50)	NOT NULL,
+	"CONTENT"	varchar2(500)	NOT NULL,
+	"REGDATE"	DATE DEFAULT 	sysdate
 );
 
 
+-- 상품문의사항
 create sequence "QUERYSEQ" start with 1 increment by 1 maxvalue 99999;
 
 create table "QUERY"(
 	"QUERYSEQ"	number primary key,
-	"PUBLIC"		varchar2(10)		NOT NULL,
-	"PRODID"		number			NOT NULL,
-	"CUSID"		varchar2(50)		NOT NULL,
-	"TITLE"		varchar2(50)		NOT NULL,
-	"CONTENT"	varchar2(500)		NOT NULL,
-	"REGDATE"	DATE DEFAULT sysdate,
-	"REPLY"		varchar2(500)		NOT NULL
+	"PUBLIC"		varchar2(10)	NOT NULL,
+	"PRODID"		number		NOT NULL,
+	"CUSID"		varchar2(50)	NOT NULL,
+	"TITLE"		varchar2(50)	NOT NULL,
+	"CONTENT"	varchar2(500)	NOT NULL,
+	"REGDATE"	DATE DEFAULT 	sysdate,
+	"REPLY"		varchar2(500)
 );
 
 
