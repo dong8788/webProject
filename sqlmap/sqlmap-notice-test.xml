@@ -8,24 +8,25 @@
         </select>
         
         <select id="select" parameterType="int" resultType="NoticeVo">
-                select * from NOTICE where NOTICESEQ = #{seq}
+                select * from NOTICE where NOTICESEQ = #{noticeSeq}
         </select>
         
         <insert id="insert" parameterType="NoticeVo">
                 insert into NOTICE("NOTICESEQ", "NOTICECATEGORY", "CONTENT", "TITLE", "REGDATE")
-					values(NOTICE_SEQ.nextval, #{category}, #{content}, #{title}, SYSDATE)
+					values(NOTICE_SEQ.nextval, #{noticeCategory}, #{content}, #{title}, SYSDATE)
         </insert>
         
         <update id="update" parameterType="NoticeVo">
                 update NOTICE set
-					NOTICECATEGORY = #{category},
-					CONTENT = #{content},
-					TITLE = #{title},
-					REGDATE = SYSDATE
+                	NOTICECATEGORY = #{noticeCategory},
+                	CONTENT = #{content},
+                	TITLE = #{title},
+                	REGDATE = SYSDATE
+				where NOTICESEQ = #{noticeSeq}
         </update>
 
         <delete id="delete" parameterType="int">
-                delete from NOTICE where NOTICESEQ = #{seq}
+                delete from NOTICE where NOTICESEQ = #{noticeSeq}
         </delete>
         
 </mapper>
