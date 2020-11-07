@@ -1,0 +1,106 @@
+* query-mapper.xml 파일
+(질문 카테고리 추가)
+
+<mapper namespace="QueryDao">
+
+	<!-- 제품상세페이지에 querySeq 순으로 제품문의 나열 -->
+	<select id="querySelectAll" resultType="QueryVo">
+		select * from QUERY order by QUERYSEQ
+	</select>
+	
+	<!-- 고객이 로그인 상태일 때 제품문의 나열 -->
+	<select id="querySelectById" parameterType="String" resultType="QueryVo">
+		select * from QUERY where CUSID=#{cusId} order by QUERYSEQ
+	</select>
+
+	<select id="querySelectOne" parameterType="int" resultType="QueryVo">
+		select * from QUERY where QUERYSEQ=#{querySeq}
+	</select>
+	
+	<insert id="queryInsert" parameterType="QueryVo">
+		insert into QUERY (queryseq, open, prodid, cusid, title, content, regdate, reply, category)
+		values(queryseq.nextval, #{open}, #{prodId}, #{cusId}, #{title}, #{content}, sysdate, #{reply}, #{category})
+	</insert>
+	
+	<update id="queryUpdate" parameterType="QueryVo">
+		update QUERY set OPEN=#{open}, TITLE=#{title}, CONTENT=#{content}, REPLY=#{reply}
+		where QUERYSEQ=#{querySeq}
+	</update>
+	
+	<delete id="queryDelete" parameterType="int">
+		delete from QUERY where QUERYSEQ=#{querySeq}
+	</delete>
+	
+</mapper>
+
+-------------------------------------------------------------------------------------------------------
+* review-mapper.xml 파일
+
+<mapper namespace="ReviewDao">
+	<select id="reviewSelectAll" resultType="ReviewVo">
+		select * from REVIEW order by SCORE desc
+	</select>
+	
+	<select id="reviewSelectOne" parameterType="int"  resultType="ReviewVo">
+		select * from REVIEW where REVIEWSEQ=#{reviewSeq}
+	</select>
+	
+	<insert id="reviewInsert" parameterType="ReviewVo">
+		insert into REVIEW (reviewseq, ponum, score, title, content, regdate)
+		values (reviewseq.nextVal, #{poNum}, #{score}, #{title}, #{content}, sysdate)
+	</insert>
+	
+	<update id="reviewUpdate" parameterType="ReviewVo">
+		update REVIEW set SCORE=#{score}, TITLE=#{title}, CONTENT=#{content} 
+		where REVIEWSEQ=#{reviewSeq}
+	</update>
+	
+	<delete id="reviewDelete" parameterType="int">
+		delete from REVIEW where REVIEWSEQ=#{reviewSeq}
+	</delete>
+</mapper>
+
+-------------------------------------------------------------------------------------------------------
+* REVIEW 테이블과 시퀀스 생성 (아래에 수정사항 있음)
+create sequence "REVIEWSEQ" start with 1 increment by 1 maxvalue 99999;
+
+create table "REVIEW"(
+	"REVIEWSEQ"	number primary key,
+	"PONUM"		number		NOT NULL, -> NULL 가능하게 속성 수정
+	"SCORE"		number		NOT NULL,
+	"TITLE"		varchar2(50)	NOT NULL,
+	"CONTENT"	varchar2(500)	NOT NULL,
+	"REGDATE"	DATE DEFAULT 	sysdate
+);
+
+* QUERY 테이블과 시퀀스 생성 (아래에 수정사항 있음)
+create sequence "QUERYSEQ" start with 1 increment by 1 maxvalue 99999;
+
+create table "QUERY"(
+	"QUERYSEQ"	number primary key,
+	"PUBLIC"		varchar2(10)	NOT NULL,
+	"PRODID"		number		NOT NULL,
+	"CUSID"		varchar2(50)	NOT NULL,
+	"TITLE"		varchar2(50)	NOT NULL,
+	"CONTENT"	varchar2(500)	NOT NULL,
+	"REGDATE"	DATE DEFAULT 	sysdate,
+	"REPLY"		varchar2(500)	NOT NULL  -> NULL 가능하게 속성 수정
+);
+
+* 샘플 데이터
+insert into "REVIEW" ("REVIEWSEQ", "PONUM", "SCORE", "TITLE", "CONTENT", "REGDATE") 
+values (REVIEWSEQ.nextval, '1234', '5', 'title', 'content', sysdate);
+
+insert into "QUERY" ("QUERYSEQ", "PUBLIC", "PRODID", "CUSID", "TITLE", "CONTENT", "REGDATE", "REPLY")
+values (QUERYSEQ.nextval, '공개글', '1234', 'centauri272', 'title', 'content', sysdate, 'reply');
+
+* REVIEW 테이블 수정
+alter table "REVIEW" modify PONUM null;
+
+* QUERY 테이블 수정
+alter table "QUERY" modify REPLY null;
+
+* QUERY 테이블 수정 (질문 카테고리 추가)
+alter table "QUERY" add "CATEGORY" varchar2(30);
+* QUERY 테이블 수정 (질문 카테고리 삭제)
+alter table "QUERY" drop column "CATEGORY";

@@ -1,4 +1,6 @@
 -- 공지
+select * from NOTICE
+
 select * from NOTICE where NOTICESEQ = #{seq}
 
 insert into NOTICE("NOTICESEQ", "NOTICECATEGORY", "CONTENT", "TITLE", "REGDATE")
@@ -14,6 +16,8 @@ update NOTICE set
 
 
 -- FAQ
+select * from FAQ
+
 select * from FAQ where FAQSEQ = #{seq}
 
 insert into FAQ("FAQSEQ", "FAQCATEGORY", "QUERY", "REPLY", "REGDATE")
