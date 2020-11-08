@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PoDao">
+<!--         <select id="list" resultType="PoVo">
+                select * from PURCHASEORDER order by PONUM
+        </select>
+        
+        주문 조회
+        <select id="getPo" parameterType="int" resultType="PoVo">
+                select * from PURCHASEORDER where PONUM = #{poNum}
+        </select> -->
+        
+       	<!-- 주문 생성 -->
+<!--         <insert id="insert" parameterType="PoVo">
+                insert into PURCHASEORDER (PONUM,CUSID,PRODSEQ,POQUANTITY,PAYNUM,RECIPIENT,RECIPIENTPHONE,RECIPIENTADDR,SHIPMEMO,
+                COURIER,SHIPPINGNUM,POSTAT,BILLINGAMOUNT,ORDERDATE,PAYMETHOD)
+                values (PONUM_SEQ.nextval,#{cusId}, #{prodSeq}, #{poQuantity}, #{payNum}, #{recipient},#{recipientPhone}, #{recipientAddr},#{shipMemo}, 
+                		#{courier}, #{shippingNum}, #{poStat}, #{billingAmount}, SYSDATE, #{payMethod})
+        </insert> -->
+        <insert id="insert" parameterType="PoVo">
+                insert into PURCHASEORDER (PONUM, CUSID, PRODSEQ, POQUANTITY,RECIPIENT,RECIPIENTPHONE,RECIPIENTADDR,SHIPMEMO,BILLINGAMOUNT,PAYMETHOD)
+                values (PONUM_SEQ.nextval,#{cusId}, #{prodSeq}, #{poQuantity}, #{recipient},#{recipientPhone}, #{recipientAddr},#{shipMemo}, #{billingAmount}, #{payMethod})
+        </insert>
+ <!--        구매 확인
+        <update id="confirmupdate" parameterType="PoVo">
+                update PURCHASEORDER set CONFIRMDATE=sysdate
+                where PONUM=#{poNum}
+        </update>
+
+        발송완료 
+        <update id="shipupdate" parameterType="PoVo">
+                update PURCHASEORDER set SHIPDATE=sysdate
+                where PONUM=#{poNum}
+        </update>
+
+        수령완료 
+        <update id="recipientupdate" parameterType="PoVo">
+                update PURCHASEORDER set RECIPIENTDATE=sysdate
+                where PONUM=#{poNum}
+        </update>
+
+        구매확정완료 
+        <update id="finalconfirmupdate" parameterType="PoVo">
+                update PURCHASEORDER set FCONFIRMDATE=sysdate
+                where PONUM=#{poNum}
+        </update>
+
+        구매거절 
+        <update id="rejectupdate" parameterType="PoVo">
+                update PURCHASEORDER set REJECTDATE=sysdate
+                where PONUM=#{poNum}
+        </update>
+        
+		취소
+        <delete id="delete" parameterType="PoVo"> 
+                delete from PURCHASEORDER where PONUM=#{poNum}
+        </delete> -->
+        
+</mapper>

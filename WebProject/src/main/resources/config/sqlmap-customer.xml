@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CustomerDao">
+
+	
+	
+	<select id="selectAll" resultType="CustomerVo">
+		select * from CUSTOMER order by CUSSEQ
+	</select>
+	
+            
+	<select id="select" resultType="CustomerVo">
+		select * from CUSTOMER where CUSID=#{cusId}
+	</select>
+
+	
+	<!-- 가입 -->
+	<insert id="insert" parameterType="CustomerVo">
+		insert into CUSTOMER ("CUSSEQ", "CUSID", "PASSWORD", "NAME", "EMAIL", "PHONE")
+		values(CUSSEQ.nextval, #{cusId}, #{password}, #{name}, #{email}, #{phone})
+    </insert>
+
+	
+	<update id="update" parameterType="CustomerVo">
+                update  customer set 
+				PASSWORD = #{password},
+				NAME = #{name},
+				EMAIL = #{email},
+				PHONE = #{phone},
+    </update>
+
+	
+	<delete id="delete" parameterType="int">
+		delete from customer where customer=#{cusSeq}
+	</delete>
+
+
+
+
+
+</mapper>
