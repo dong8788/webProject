@@ -8,24 +8,25 @@
         </select>
         
         <select id="select" parameterType="int" resultType="FaqVo">
-                select * from FAQ where FAQSEQ = #{seq}
+                select * from FAQ where FAQSEQ = #{faqSeq}
         </select>
         
         <insert id="insert" parameterType="FaqVo">
                 insert into FAQ("FAQSEQ", "FAQCATEGORY", "QUERY", "REPLY", "REGDATE")
-					values(FAQ_SEQ.nextval, #{category}, #{query}, #{reply}, SYSDATE)
+					values(FAQ_SEQ.nextval, #{faqCategory}, #{query}, #{reply}, SYSDATE)
         </insert>
         
         <update id="update" parameterType="FaqVo">
                 update FAQ set
-					FAQCATEGORY = #{category},
+					FAQCATEGORY = #{faqCategory},
 					QUERY = #{query},
 					REPLY = #{reply},
 					REGDATE = SYSDATE
+				where FAQSEQ = #{faqSeq}
         </update>
 
         <delete id="delete" parameterType="int">
-                delete from FAQ where FAQSEQ = #{seq}
+                delete from FAQ where FAQSEQ = #{faqSeq}
         </delete>
         
 </mapper>

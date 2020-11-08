@@ -57,24 +57,24 @@ create sequence "CART_SEQ" start with 1 increment by 1 maxvalue 99999;
 
 create table "NOTICE" (
     "NOTICESEQ" number primary key,
-    "NOTICECATEGORY" varchar2(10),
+    "NOTICECATEGORY" varchar2(30),
     "CONTENT" varchar2(1000),
     "TITLE" varchar2(255),
-    "REGDATE" timestamp
+    "REGDATE" date default sysdate
 );
 
 create table "FAQ" (
     "FAQSEQ" number,
-    "FAQCATEGRY" varchar2(10),
+    "FAQCATEGRY" varchar2(30),
     "QUERY" varchar2(1000),
     "REPLY" varchar2(1000),
-    "REGDATE" timestamp
+    "REGDATE" date default sysdate
 );
 
-create table "CART" (
-    "CUSSEQ" number,
-    "PRODSEQ" varchar2(127),
-    "POQUANTITY" number
+create table CART (
+    CUSSEQ number references CUSTOMER(CUSSEQ),
+    PRODSEQ number references PRODUCT(PRODSEQ),
+    POQUANTITY number
 );
 
 -- 상품평
