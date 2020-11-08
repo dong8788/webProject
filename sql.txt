@@ -57,7 +57,7 @@ create sequence "CART_SEQ" start with 1 increment by 1 maxvalue 99999;
 
 create table "NOTICE" (
     "NOTICESEQ" number primary key,
-    "NOTICECATEGORY" varchar2(30),
+    "NOTICECATEGORY" varchar2(10),
     "CONTENT" varchar2(1000),
     "TITLE" varchar2(255),
     "REGDATE" timestamp
@@ -91,11 +91,12 @@ create table "REVIEW"(
 
 
 -- 상품문의사항
+--query 수정
 create sequence "QUERYSEQ" start with 1 increment by 1 maxvalue 99999;
 
 create table "QUERY"(
 	"QUERYSEQ"	number primary key,
-	"PUBLIC"		varchar2(10)	NOT NULL,
+    "OPEN"      varchar(20) NOT NULL,
 	"PRODID"		number		NOT NULL,
 	"CUSID"		varchar2(50)	NOT NULL,
 	"TITLE"		varchar2(50)	NOT NULL,
@@ -103,6 +104,13 @@ create table "QUERY"(
 	"REGDATE"	DATE DEFAULT 	sysdate,
 	"REPLY"		varchar2(500)
 );
+
+insert into "QUERY" ("QUERYSEQ", "PUBLIC", "PRODID", "CUSID", "TITLE", "CONTENT", "REPLY")
+values (QUERYSEQ.nextval, '공개글', '1234', 'centauri272', 'title', 'content', 'reply');
+
+DROP TABLE QUERY;
+
+SELECT * FROM QUERY;
 
 
 
