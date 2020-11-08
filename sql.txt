@@ -53,7 +53,6 @@ SELECT *FROM PURCHASEORDER;
 -- 공지사항 FAQ 장바구니 테이블
 create sequence "NOTICE_SEQ" start with 1 increment by 1 maxvalue 99999;
 create sequence "FAQ_SEQ" start with 1 increment by 1 maxvalue 99999;
-create sequence "CART_SEQ" start with 1 increment by 1 maxvalue 99999;
 
 create table "NOTICE" (
     "NOTICESEQ" number primary key,
