@@ -8,22 +8,23 @@
         </select>
         
         <select id="select" parameterType="int" resultType="CartVo">
-                select * from CART where CUSSEQ = #{seq}
+                select * from CART where CUSSEQ = #{cusSeq}`
         </select>
         
         <insert id="insert" parameterType="CartVo">
                 insert into CART("CUSSEQ", "PRODSEQ", "POQUANTITY")
-					values(#{cusseq}, #{prodseq}, #{poquantity})
+					values(#{cusSeq}, #{prodSeq}, #{poQuantity})
         </insert>
         
         <update id="update" parameterType="CartVo">
                 update CART set
-					PRODSEQ = #{prodseq},
-					POQUANTITY = #{poquantity}
+					PRODSEQ = #{prodSeq},
+					POQUANTITY = #{poQuantity}
+				where CUSSEQ = #{cusSeq}
         </update>
 
         <delete id="delete" parameterType="int">
-                delete from CART where CUSSEQ = #{seq}
+                delete from CART where CUSSEQ = #{cusSeq}
         </delete>
         
 </mapper>
