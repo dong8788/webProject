@@ -153,11 +153,15 @@ create table "SELLER"(
 	"SELLERSEQ"	number primary key,
 	"BUSINESSNAME"	varchar2(100) UNIQUE,
 	"NAME" 		varchar2(50),
-	"PHONE"		varchar2(11),
+	"PHONE"		varchar2(50),
 	"ADDR"		varchar2(50),
 	"EMAIL"		varchar2(20) UNIQUE,
 	"ID"		varchar2(50) UNIQUE,
-	"PASSWORD"	varchar2(50),
+	"PASSWORD"	varchar2(100),
 	"JOINDATE"	date default sysdate,
 	"BUSINESSNUM"	nvarchar2(100) UNIQUE
 );
+
+SELECT * FROM SELLER;
+
+DROP TABLE SELLER;
