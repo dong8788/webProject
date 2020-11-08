@@ -53,6 +53,7 @@ SELECT *FROM PURCHASEORDER;
 -- 공지사항 FAQ 장바구니 테이블
 create sequence "NOTICE_SEQ" start with 1 increment by 1 maxvalue 99999;
 create sequence "FAQ_SEQ" start with 1 increment by 1 maxvalue 99999;
+create sequence "CART_SEQ" start with 1 increment by 1 maxvalue 99999;
 
 create table "NOTICE" (
     "NOTICESEQ" number primary key,
@@ -135,15 +136,22 @@ SELLERSEQ NUMBER,
 CATEGORY varchar2(50),
 PRODNAME varchar2(100),
 PRODINFORM varchar2(1000),
-PRICE number notnull,
-DISCOUNT number,
-STOCK NUMBER DEFAULT 9999,
-SHIPPINGCHARGE NUMBER DEFAULT 0,
+PRICE number not null,
+DISCOUNT number DEFAULT 0,
+STOCK NUMBER DEFAULT 99999,
+SHIPPINGCHARGE NUMBER,
 REGDATE date default sysdate,
-UPDATEDATE date default sysdate
+UPDATEDATE date
 );
 
-create sequence "prodseq" start with 1 increment by 1 maxvalue 99999; 
+DROP TABLE PRODUCT;
+
+INSERT INTO PRODUCT (PRODSEQ,SELLERSEQ,CATEGORY,PRODNAME,PRODINFORM,PRICE,DISCOUNT,STOCK,SHIPPINGCHARGE) 
+VALUES (PRODSEQ.NEXTVAL, 1, '패션', '점퍼', '너무따뜻해요', 10000, 1000, 9999, 2500);
+
+SELECT * FROM PRODUCT;
+
+create sequence "PRODSEQ" start with 1 increment by 1 maxvalue 99999; 
 
 
 ---판매자 정보
