@@ -18,7 +18,7 @@ DROP TABLE CUSTOMER;
 -- 주문상세내역 SQL
 CREATE TABLE PURCHASEORDER(
 	PONUM NUMBER PRIMARY KEY,
-	CUSID VARCHAR2(20),
+	CUSSEQ NUMBER,
 	PRODSEQ VARCHAR2(20),
 	POQUANTITY NUMBER,
 	PAYNUM NUMBER,
@@ -60,9 +60,9 @@ SELECT *FROM PURCHASEORDER;
 COMMIT;
 
 -- 공지사항 FAQ 장바구니 테이블
-create sequence "NOTICE_SEQ" start with 1 increment by 1 maxvalue 99999;
-create sequence "FAQ_SEQ" start with 1 increment by 1 maxvalue 99999;
-create sequence "CART_SEQ" start with 1 increment by 1 maxvalue 99999;
+create sequence "NOTICE_SEQ" start with 1 increment by 1 NOMAXVALUE NOCYCLE;
+create sequence "FAQ_SEQ" start with 1 increment by 1 NOMAXVALUE NOCYCLE;
+create sequence "CART_SEQ" start with 1 increment by 1 NOMAXVALUE NOCYCLE;
 
 create table "NOTICE" (
     "NOTICESEQ" number primary key,
@@ -80,11 +80,24 @@ create table "FAQ" (
     "REGDATE" date default sysdate
 );
 
+-- 장바구니 정보
 create table CART (
-    CUSSEQ number references CUSTOMER(CUSSEQ),
-    PRODSEQ number references PRODUCT(PRODSEQ),
-    POQUANTITY number
+	CARTSEQ NUMBER PRIMARY KEY,
+	CUSSEQ number,
+	PRODSEQ number,
+	POQUANTITY number
 );
+
+INSERT INTO CART (CARTSEQ, CUSSEQ, PRODSEQ, POQUANTITY) 
+VALUES (CART_SEQ.NEXTVAL, '23', '6', '2');
+
+SELECT * FROM CART;
+
+DROP TABLE CART;
+
+COMMIT;
+
+create sequence "CART_SEQ" start with 1 increment by 1 NOMAXVALUE NOCYCLE;
 
 -- 상품평
 create sequence "REVIEWSEQ" start with 1 increment by 1 maxvalue 99999;
@@ -106,22 +119,20 @@ create sequence "QUERYSEQ" start with 1 increment by 1 maxvalue 99999;
 create table "QUERY"(
 	"QUERYSEQ"	number primary key,
     "OPEN"      varchar(20) NOT NULL,
-	"PRODID"		number		NOT NULL,
-	"CUSID"		varchar2(50)	NOT NULL,
+	"PRODSEQ"    number		NOT NULL,
+	"CUSSEQ"	NUMBER		NOT NULL,
 	"TITLE"		varchar2(50)	NOT NULL,
 	"CONTENT"	varchar2(500)	NOT NULL,
-	"REGDATE"	DATE DEFAULT 	sysdate,
+	"QREGDATE"	DATE DEFAULT 	sysdate,
 	"REPLY"		varchar2(500)
 );
 
-insert into "QUERY" ("QUERYSEQ", "PUBLIC", "PRODID", "CUSID", "TITLE", "CONTENT", "REPLY")
-values (QUERYSEQ.nextval, '공개글', '1234', 'centauri272', 'title', 'content', 'reply');
+insert into "QUERY" ("QUERYSEQ", "OPEN", "PRODSEQ", "CUSID", "TITLE", "CONTENT", "REPLY")
+values (QUERYSEQ.nextval, '공개글', 5, 'dong', 'title', 'content', 'reply');
 
 DROP TABLE QUERY;
 
 SELECT * FROM QUERY;
-
-
 
 --- 고객센터 문의
 create table CENQUERY(
