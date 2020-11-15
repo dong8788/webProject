@@ -28,25 +28,22 @@ public class NoticeDaoImpl implements NoticeDao {
 
 	@Override
 	public NoticeVo selectBySeq(int noticeSeq) {
-		return sqlSessionTemplate.selectOne("NoticeDao.select", noticeSeq);
+		return sqlSessionTemplate.selectOne("NoticeDao.selectBySeq", noticeSeq);
 	}
 
 	@Override
 	public void delete(int noticeSeq) {
-		sqlSessionTemplate.delete("NoticeDao.delete");
-
+		sqlSessionTemplate.delete("NoticeDao.delete", noticeSeq);
 	}
 
 	@Override
 	public void insert(NoticeVo notice) {
-		// TODO Auto-generated method stub
-
+		sqlSessionTemplate.insert("NoticeDao.insert", notice);
 	}
 
 	@Override
 	public void update(NoticeVo notice) {
-		// TODO Auto-generated method stub
-
+		sqlSessionTemplate.update("NoticeDao.update", notice);
 	}
 
 }

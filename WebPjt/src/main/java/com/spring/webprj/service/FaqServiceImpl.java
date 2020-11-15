@@ -27,20 +27,17 @@ public class FaqServiceImpl implements FaqService {
 	
 	@Override
 	public FaqVo select(int faqSeq) {
-		// TODO Auto-generated method stub
 		return faqDao.select(faqSeq);
 	}
 
 	@Override
 	public void delete(int faqSeq) {
 		faqDao.delete(faqSeq);
-
 	}
 
 	@Override
 	public void insert(FaqVo faq) {
 		faqDao.insert(faq);
-
 	}
 
 

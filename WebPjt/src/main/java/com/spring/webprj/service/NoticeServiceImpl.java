@@ -33,19 +33,16 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public void delete(int noticeSeq) {
 		noticeDao.delete(noticeSeq);
-		
 	}
 
 	@Override
 	public void insert(NoticeVo notice) {
-		// TODO Auto-generated method stub
-		
+		noticeDao.insert(notice);
 	}
 
 	@Override
 	public void update(NoticeVo notice) {
-		// TODO Auto-generated method stub
-		
+		noticeDao.update(notice);
 	}
 
 
