@@ -5,7 +5,7 @@ import java.sql.Date;
 public class PoVo {
 
 	private int poNum;
-	private String cusId;
+	private int cusSeq;
 	private int prodSeq;
 	private int poQuantity;
 	private int payNum;
@@ -30,11 +30,11 @@ public class PoVo {
 	public void setPoNum(int poNum) {
 		this.poNum = poNum;
 	}
-	public String getCusId() {
-		return cusId;
+	public int getCusSeq() {
+		return cusSeq;
 	}
-	public void setCusId(String cusId) {
-		this.cusId = cusId;
+	public void setCusSeq(int cusSeq) {
+		this.cusSeq = cusSeq;
 	}
 	public int getProdSeq() {
 		return prodSeq;
@@ -146,7 +146,7 @@ public class PoVo {
 	}
 	@Override
 	public String toString() {
-		return "PoVo [poNum=" + poNum + ", cusId=" + cusId + ", prodSeq=" + prodSeq + ", poQuantity=" + poQuantity
+		return "PoVo [poNum=" + poNum + ", cusSeq=" + cusSeq + ", prodSeq=" + prodSeq + ", poQuantity=" + poQuantity
 				+ ", payNum=" + payNum + ", recipient=" + recipient + ", recipientPhone=" + recipientPhone
 				+ ", recipientAddr=" + recipientAddr + ", shipMemo=" + shipMemo + ", courier=" + courier
 				+ ", shippingNum=" + shippingNum + ", poStat=" + poStat + ", billingAmount=" + billingAmount

@@ -9,9 +9,9 @@
 		select * from QUERY order by QUERYSEQ
 	</select>
 	
-	<!-- 고객이 로그인 상태일 때 제품문의 나열 -->
-	<select id="querySelectById" parameterType="String" resultType="QueryVo">
-		select * from QUERY where CUSID=#{cusId} order by QUERYSEQ
+	<!-- 고객이 로그인 상태일 때 마이페이지 제품문의 나열 -->
+	<select id="querySelectBySeq" parameterType="int" resultType="QueryProductVo">
+		select * from QUERY query, PRODUCT prod where prod.PRODSEQ = query.PRODSEQ AND query.CUSSEQ=#{cusSeq}
 	</select>
 
 	<select id="querySelectOne" parameterType="int" resultType="QueryVo">

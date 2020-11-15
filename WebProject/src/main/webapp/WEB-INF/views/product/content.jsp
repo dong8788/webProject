@@ -181,9 +181,9 @@
 										<c:forEach var="query" items="${queryList}" varStatus="loop">
 											<c:set var="reply" value="${query.reply }"/>
 												<tr align="center">
-													<td>${query.prodId}</td>
+													<td>${query.prodSeq}</td>
 													<td>${query.title}</td>
-													<td>${query.regDate}</td>
+													<td>${query.qregDate}</td>
 													<td>
 													<c:choose>
 														<c:when test="${reply != null }">Y</c:when>
@@ -243,8 +243,7 @@
 								<!-- User Review -->
 								
 								<c:forEach var="review" items="${reviewList}" varStatus="loop">
-										<div class="user_review_container d-flex flex-column flex-sm-row">
-											<div class="user">
+										 
 												<div class="user_pic"></div>
 												<div class="user_rating">
 													<ul class="star_rating">

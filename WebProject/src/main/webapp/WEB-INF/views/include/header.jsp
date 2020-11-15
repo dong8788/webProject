@@ -1,4 +1,8 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@page import="com.spring.webprj.persistence.CartDao"%>
+<%@page import="com.spring.webprj.domain.CustomerVo"%>
+<%@page import="org.springframework.beans.factory.annotation.Autowired"%>
+<%@page import="com.spring.webprj.service.CartService"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -37,27 +41,33 @@
 				<div class="row">
 					<div class="col-lg-12 text-right">
 						<div class="logo_container">
-							<a href="/ex/">2jo<span>shop</span></a>
+							<a href="<c:url value='/'/>">2jo<span>shop</span></a>
 							
 						</div>
 						
 						<nav class="navbar">
+						<c:if test="${seller1 == null}" >
 						<form action="<c:url value='/product/search'/>" method="get">
 							<input type="text" class="form-control" name="keyword" id="keywordInput" placeholder="검색"/>
 							<button type="submit" class="fa fa-search" aria-hidden="true"></button>
 						</form>
+						</c:if>
 							<ul class="navbar_user" style="margin-left:10px">
 								<!-- 고객센터 -->
 								<li style="width:90px"><a href="<c:url value='/cs/main'/>" style="width:90px">고객센터</a></li>
 								<!-- 마이페이지 -->								
 								<li><a href="<c:url value='/mypage/main'/>"><i class="fa fa-user" aria-hidden="true"></i></a></li>&nbsp;&nbsp;
 								<!-- 장바구니 링크 -->
+								<c:if test="${seller1 == null}" >
 								<li class="checkout">
 									<a href="<c:url value='/mypage/cart'/>">
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-										<span id="checkout_items" class="checkout_items">2</span>	
+										<span id="checkout_items" class="checkout_items">
+										${cartSize }
+										</span>	
 									</a>
 								</li>
+								</c:if>
 							</ul>
 							<div class="hamburger_container">
 								<i class="fa fa-bars" aria-hidden="true"></i>

@@ -4,8 +4,16 @@
 
 <mapper namespace="SellerDao">
 
+	<select id="selectAll" resultType="SellerVo">
+		SELECT * FROM SELLER
+	</select>
+
 	<select id="select" resultType="SellerVo">
 		SELECT * FROM SELLER WHERE ID=#{id}
+	</select>
+
+	<select id="checkSellerId" resultType="int">
+		SELECT COUNT(*) FROM SELLER WHERE ID=#{id}
 	</select>
 	
 	<insert id="insert" parameterType="SellerVo">

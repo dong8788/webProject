@@ -20,12 +20,18 @@ public class CustomerServiceImpl implements CustomerService {
 		System.out.println("selectAll");
 		return cusDao.selectAll();
 	}
-
+	//고객 정보 확인
 	@Override
 	public CustomerVo select(String cusId) {
 		System.out.println("select");
 		System.out.println(cusId);
 		return cusDao.select(cusId);
+	}
+	
+	@Override
+	public int checkCusId(String cusId) {
+		// TODO Auto-generated method stub
+		return cusDao.checkCusId(cusId);
 	}
 
 	@Override
@@ -47,6 +53,19 @@ public class CustomerServiceImpl implements CustomerService {
 		System.out.println("insert");
 		cusDao.insert(cus);
 
+	}
+	@Override
+	public void update(CustomerVo cus) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		System.out.println("암호화 전 : "+ cus.getPassword());
+		//비밀번호를 암호화하여 다시 User객체에 저장
+		String securePw = encoder.encode(cus.getPassword());
+		cus.setPassword(securePw);
+		System.out.println("암호화 후 : "+ securePw);
+		System.out.println(cus);
+		System.out.println("insert");
+		cusDao.update(cus);
+		
 	}
 
 }

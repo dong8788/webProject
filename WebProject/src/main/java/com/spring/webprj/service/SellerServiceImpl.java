@@ -24,6 +24,11 @@ public class SellerServiceImpl implements SellerService {
 	public SellerVo select(String id) {
 		return sellerDao.select(id);
 	}
+	
+	@Override
+	public int checkSellerId(String id) {
+		return sellerDao.checkSellerId(id);
+	}
 
 	@Override
 	public void delete(int sellerSeq) {

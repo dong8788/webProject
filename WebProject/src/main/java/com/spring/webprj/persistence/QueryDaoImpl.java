@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.spring.webprj.domain.QueryProductVo;
 import com.spring.webprj.domain.QueryVo;
 
 @Repository
@@ -20,8 +21,9 @@ public class QueryDaoImpl implements QueryDao {
 	}
 
 	@Override
-	public List<QueryVo> querySelectById(String cusId) {
-		return sqlSessionTemplate.selectList("QueryDao.querySelectById", cusId);
+	public List<QueryProductVo> querySelectBySeq(int cusSeq) {
+		System.out.println("query : querySelectBySeq");
+		return sqlSessionTemplate.selectList("QueryDao.querySelectBySeq", cusSeq);
 	}
 
 	@Override

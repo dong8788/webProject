@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.webprj.domain.QueryProductVo;
 import com.spring.webprj.domain.QueryVo;
 import com.spring.webprj.persistence.QueryDao;
 
@@ -20,8 +21,8 @@ public class QueryServiceImpl implements QueryService {
 	}
 
 	@Override
-	public List<QueryVo> querySelectById(String cusId) {
-		return queryDao.querySelectById(cusId);
+	public List<QueryProductVo> querySelectBySeq(int cusSeq) {
+		return queryDao.querySelectBySeq(cusSeq);
 	}
 
 	@Override

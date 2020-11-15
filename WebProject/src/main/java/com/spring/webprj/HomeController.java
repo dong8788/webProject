@@ -1,20 +1,17 @@
 package com.spring.webprj;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.spring.webprj.domain.PoVo;
+import com.spring.webprj.domain.CustomerVo;
+import com.spring.webprj.service.CartService;
+
 
 /**
  * Handles requests for the application home page.
@@ -22,16 +19,24 @@ import com.spring.webprj.domain.PoVo;
 @Controller
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	@Autowired
+	private CartService cartservice;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(HttpSession session) {
-		if(session.getAttribute("seller1") == "판매자용로그인") {
-			return "seller/home/";
-		}else return "home";
+	public String home(HttpSession session, Model model) {
+		if(session.getAttribute("seller1") != null) {
+			return "/seller/main";
+		}else {
+			if(session.getAttribute("login") != null) {
+				System.out.println(((CustomerVo)session.getAttribute("login")).getCusSeq());
+				int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
+				model.addAttribute("cartSize", cartSize);
+			}
+			return "home";
+		}
 	}
 	
 

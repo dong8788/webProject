@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.webprj.domain.PoProductVo;
 import com.spring.webprj.domain.PoVo;
 import com.spring.webprj.persistence.PoDao;
 
@@ -15,9 +16,20 @@ public class PoServiceImpl implements PoService {
 	private PoDao poDao;
 	
 	@Override
-	public List<PoVo> list() {
+	public List<PoProductVo> list(int cusSeq) {
 		
-		return poDao.list();
+		return poDao.list(cusSeq);
+	}
+	
+	@Override
+	public List<PoProductVo> listAll() {
+		
+		return poDao.listAll();
+	}
+	
+	@Override
+	public List<PoProductVo> newOrderlist(int sellerSeq) {
+		return poDao.newOrderlist(sellerSeq);
 	}
 
 	@Override

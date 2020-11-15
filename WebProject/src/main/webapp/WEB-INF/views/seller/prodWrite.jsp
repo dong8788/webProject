@@ -36,40 +36,73 @@
 			</div>
 		</div>
 		<div class="table-wrapper" style="margin-left:250px;margin-top:200px;margin-bottom:300px;overflow-x:auto;max-width:70% ">
-			<h4>판매자 메인페이지</h4>
+			<h4>상품 등록</h4>
 			<br><br>
+			<form action="${pageContext.request.contextPath}/seller/prodWrite" method="post">
+			<input type="hidden" name="sellerSeq" value="${login.sellerSeq }">
 			<table style="width:100%;" border="1">
-				<thead align="center"" style="height: 3em">
-					<tr style="height: 6em">
-					<th style="width:25%"><%= sf.format(nowTime) %></th>
-					<th style="width:25%">신규 주문</th>
-					<th style="width:25%">발송 처리</th>					
-					<th style="width:25%">상품 문의</th>					
-					</tr>
-				</thead>
+				<tr>
+					<td>카테고리</td>
+					<td>
+						<select name="category">
+						<option value="패션" selected="selected">패션</option>
+						<option value="잡화">잡화</option>
+						<option value="뷰티">뷰티</option>
+						<option value="주방">주방</option>
+						<option value="가전디지털">가전디지털</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>제품명</td>
+					<td><input type="text" name="prodName"></td>
+				</tr>
+				<tr>
+					<td>제품사진</td>
+					<td>
+						<div class="inputArea">
+						<label for="photoUrl">이미지</label>
+					 	<input type="file" id="photoUrl" name="file" />
+					 	<div class="select_img"><img src="" /></div>
+					 
+						 	<script>
+						  	$("#photoUrl").change(function(){
+						   	if(this.files && this.files[0]) {
+						    	var reader = new FileReader;
+						    	reader.onload = function(data) {
+						     $(".select_img img").attr("src", data.target.result).width(500);        
+						    	}
+						    	reader.readAsDataURL(this.files[0]);
+						   	}
+						  	});
+						 	</script>
+						 		<%=request.getRealPath("/src/main/webapp/resources/images") %>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>제품정보</td>
+					<td><textarea name="prodInfo"></textarea></td>
+				</tr>
+				<tr>
+					<td>가격</td>
+					<td><input type="text" name="price"></td>
+				</tr>
+				<tr>
+					<td>할인가격</td>
+					<td><input type="text" name="discount"></td>
+				</tr>
+				<tr>
+					<td>배송비</td>
+					<td><input type="text" name="shippingCharge"></td>
+				</tr>
+				<tr>
+					<td>재고수량</td>
+					<td><input type="text" name="stockNumber"></td>
+				</tr>
 			</table>
-			<br><br><br>
-			<table style="width:100%;">
-				<thead align="center"" style="height: 3em">
-					<tr>
-						<th>주문</th>
-						<th>배송</th>					
-						<th>상품문의</th>					
-					</tr>
-				</thead>
-				<tbody align="center" style="height: 3em">
-					<tr style="height: 3em">
-						<td>신규 주문 : 1</td>
-						<td>배송 중 : 1</td>
-						<td>상품 문의 : 1</td>
-					</tr>
-					<tr style="height: 3em">
-						<td>발송 필요 : 1</td>
-						<td></td>
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
+			<input type="submit" value="등록">
+			</form>
 		</div>
 	</div>
 </body>

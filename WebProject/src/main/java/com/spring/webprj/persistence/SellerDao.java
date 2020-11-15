@@ -12,6 +12,9 @@ public interface SellerDao {
 	//Seller 상세 조회 기능
 	public SellerVo select(String id);
 	
+	//Seller id 체크 기능
+	public int checkSellerId(String id);
+	
 	//Seller 취소 기능
 	public void delete(int sellerSeq);
 	

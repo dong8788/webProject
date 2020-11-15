@@ -6,22 +6,12 @@ public class QueryVo {
 
 	private int querySeq;
 	private String open;
-	private int prodId;
-	private String cusId;
+	private int prodSeq;
+	private int cusSeq;
 	private String title;
 	private String content;
-	private Date regDate;
+	private Date qregDate;
 	private String reply;
-	
-	public QueryVo() {}
-	
-	public QueryVo(String open, String title, String content) {
-		super();
-		this.open=open;
-		this.title=title;
-		this.content=content;
-	}
-	
 	public int getQuerySeq() {
 		return querySeq;
 	}
@@ -34,17 +24,17 @@ public class QueryVo {
 	public void setOpen(String open) {
 		this.open = open;
 	}
-	public int getProdId() {
-		return prodId;
+	public int getProdSeq() {
+		return prodSeq;
 	}
-	public void setProdId(int prodId) {
-		this.prodId = prodId;
+	public void setProdSeq(int prodSeq) {
+		this.prodSeq = prodSeq;
 	}
-	public String getCusId() {
-		return cusId;
+	public int getCusSeq() {
+		return cusSeq;
 	}
-	public void setCusId(String cusId) {
-		this.cusId = cusId;
+	public void setCusId(int cusSeq) {
+		this.cusSeq = cusSeq;
 	}
 	public String getTitle() {
 		return title;
@@ -58,11 +48,11 @@ public class QueryVo {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getRegDate() {
-		return regDate;
+	public Date getQregDate() {
+		return qregDate;
 	}
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
+	public void setQregDate(Date qregDate) {
+		this.qregDate = qregDate;
 	}
 	public String getReply() {
 		return reply;
@@ -70,12 +60,14 @@ public class QueryVo {
 	public void setReply(String reply) {
 		this.reply = reply;
 	}
-
 	@Override
 	public String toString() {
-		return "QueryVo [querySeq=" + querySeq + ", open=" + open + ", prodId=" + prodId + ", cusId=" + cusId
-				+ ", title=" + title + ", content=" + content + ", regDate=" + regDate + ", reply=" + reply + "]";
+		return "QueryVo [querySeq=" + querySeq + ", open=" + open + ", prodSeq=" + prodSeq + ", cusSeq=" + cusSeq
+				+ ", title=" + title + ", content=" + content + ", qregDate=" + qregDate + ", reply=" + reply + "]";
 	}
+
+	
+	
 	
 		
 }
