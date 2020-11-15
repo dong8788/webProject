@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
@@ -23,6 +24,11 @@
 				<value>classpath:config/sqlmap-seller.xml</value>
 				<value>classpath:config/sqlmap-query.xml</value>
 				<value>classpath:config/sqlmap-review.xml</value>
+				<value>classpath:config/sqlmap-product.xml</value>
+				<value>classpath:config/sqlmap-cart.xml</value>
+				<value>classpath:config/sqlmap-notice.xml</value>
+				<value>classpath:config/sqlmap-faq.xml</value>
+				<value>classpath:config/sqlmap-cenQuery.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -30,4 +36,6 @@
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactoryBean"/>
 	</bean>
+	<!-- 패키지 -->
+   <context:component-scan base-package="com.spring.webprj.util" />
 </beans>

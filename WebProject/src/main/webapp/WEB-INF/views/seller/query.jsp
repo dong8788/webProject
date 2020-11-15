@@ -35,39 +35,39 @@
 				</ul>
 			</div>
 		</div>
-		<div class="table-wrapper" style="margin-left:250px;margin-top:200px;margin-bottom:300px;overflow-x:auto;max-width:70% ">
-			<h4>판매자 메인페이지</h4>
+			<div class="table-wrapper" style="margin-left:250px;margin-top:200px;margin-bottom:300px;overflow-x:auto;max-width:70% ">
+			<h4>문의사항 관리</h4>
 			<br><br>
 			<table style="width:100%;" border="1">
-				<thead align="center"" style="height: 3em">
-					<tr style="height: 6em">
-					<th style="width:25%"><%= sf.format(nowTime) %></th>
-					<th style="width:25%">신규 주문</th>
-					<th style="width:25%">발송 처리</th>					
-					<th style="width:25%">상품 문의</th>					
-					</tr>
-				</thead>
-			</table>
-			<br><br><br>
-			<table style="width:100%;">
-				<thead align="center"" style="height: 3em">
-					<tr>
-						<th>주문</th>
-						<th>배송</th>					
-						<th>상품문의</th>					
+				<thead align="center" style="height: 3em">
+					<tr style="height: 3em">
+					<th>상품명</th>
+					<th style="width:100px">문의제목</th>
+					<th>문의일시</th>
+					<th>답변상태</th>									
+					<th></th>
 					</tr>
 				</thead>
 				<tbody align="center" style="height: 3em">
+				<c:forEach var="query" items="${ querylist}" varStatus="loop">
 					<tr style="height: 3em">
-						<td>신규 주문 : 1</td>
-						<td>배송 중 : 1</td>
-						<td>상품 문의 : 1</td>
+						<td>${ query.prodName }</td>
+						<td>${ query.title }</td>
+						<td>${ query.qregDate }</td>
+						<td>
+							<c:choose>
+								<c:when test="${query.reply != null }">Y</c:when>
+								<c:when test="${query.reply == null }">N</c:when>
+							</c:choose>
+						</td>
+						<td>
+							<c:choose>
+								<c:when test="${query.reply != null }"><button onclick="location.href='<c:url value="/seller/reply/${ query.querySeq }"/>'">답변수정</button></c:when>
+								<c:when test="${query.reply == null }"><button onclick="location.href='<c:url value="/seller/reply/${ query.querySeq }"/>'">답변하기</button></c:when>
+							</c:choose>
+						</td>
 					</tr>
-					<tr style="height: 3em">
-						<td>발송 필요 : 1</td>
-						<td></td>
-						<td></td>
-					</tr>
+				</c:forEach>
 				</tbody>
 			</table>
 		</div>

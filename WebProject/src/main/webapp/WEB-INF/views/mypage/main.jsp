@@ -17,17 +17,24 @@
 					<h5>마이페이지</h5>
 				</div>
 				<ul class="sidebar_categories">
+				<c:if test="${seller1 == null}">
 					<li><a href="<c:url value='/mypage/cart'/>">장바구니</a></li>
 					<li><a href="<c:url value='/mypage/polist'/>">주문목록</a></li>
 					<li><a href="<c:url value='/mypage/prodquery'/>">상품문의내역</a></li>
-					<li><a href="<c:url value='#'/>">사용자 정보 수정</a></li>
-					<li><a href="<c:url value='#'/>">사용자 탈퇴</a></li>
+					<li><a href="<c:url value='/user/cusModify'/>">사용자 정보 수정</a></li>
+					<li><a href="<c:url value='/user/cusDelete'/>">사용자 탈퇴</a></li>
+				</c:if>
+				<c:if test="${seller1 != null}">
+					<li><a href="<c:url value='/user/sellerModify'/>">사용자 정보 수정</a></li>
+					<li><a href="<c:url value='/user/sellerDelete'/>">사용자 탈퇴</a></li>
+				</c:if>
 				</ul>
 			</div>
 		</div>
 		<div class="table-wrapper" style="margin-left:250px;margin-top:200px;margin-bottom:300px;overflow-x:auto;max-width:70% ">
 			<h4>마이페이지</h4>
 			<br><br>
+			<c:if test="${seller1 == null}">
 			<table style="width:100%;">
 				<thead align="center"" style="">
 					<tr>
@@ -38,12 +45,13 @@
 				</thead>
 				<tbody align="center">
 					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>2/2</td>
+						<td>${ cartSize }</td>
+						<td>${ polistSize }</td>
+						<td>${ prodquerySize } / ${ prodreplySize } </td>
 					</tr>
 				</tbody>
 			</table>
+			</c:if>
 		</div>
 	</div>
 </body>

@@ -20,12 +20,13 @@
 						<td colspan="3"><input type="radio" name="login" value="customer" checked>회원&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="login" value="seller" checked>판매자</td>
 					</tr>
 					<tr style="height:6em">
-						<td colspan="2" align="center"><input type="text" id="Id" name="cusId" placeholder="User id" max="20"><br><input type="text" name="password" placeholder="User pw" max="20"></td>
+						<td colspan="2" align="center"><input type="text" id="Id" name="cusId" placeholder="User id" max="20"><br>
+						<input type="password" name="password" placeholder="User pw" max="20"></td>
 						<td><input type="submit" value="로그인" style="width:100%"></td>
 					</tr>
 					</form>
 					<tr>
-						<td colspan="3" style="height:3em"><input type="checkbox">아이디 저장</td>
+						<td colspan="3" style="height:3em"><input type="checkbox" value="idSave">아이디 저장</td>
 					</tr>
 					<tr>
 						<td><a href="<c:url value='/user/searchid'/>">아이디 찾기</a></td>

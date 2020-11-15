@@ -24,6 +24,11 @@ public class SellerDaoImpl implements SellerDao {
 	public SellerVo select(String id) {
 		return sqlSessionTemplate.selectOne("SellerDao.select",id);
 	}
+	
+	@Override
+	public int checkSellerId(String id) {
+		return sqlSessionTemplate.selectOne("SellerDao.checkSellerId",id);
+	}
 
 	@Override
 	public void delete(int sellerSeq) {

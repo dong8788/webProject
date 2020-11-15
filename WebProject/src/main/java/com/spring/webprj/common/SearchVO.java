@@ -1,6 +1,6 @@
 package com.spring.webprj.common;
 
-public class SearchVO extends PageVO{
+public class SearchVO extends Criteria{
 	
 	private String keyword;
 	private String condition;

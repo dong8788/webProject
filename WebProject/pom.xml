@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.test</groupId>
 	<artifactId>ex</artifactId>
-	<name>exboard</name>
+	<name>WebPjt</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -196,6 +196,19 @@
 			<artifactId>spring-security-web</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+				<!-- 파일업로드 라이브러리 -->
+    	<dependency>
+          	<groupId>commons-fileupload</groupId>
+          	<artifactId>commons-fileupload</artifactId>
+          	<version>1.3.3</version>
+      	</dependency>
+
+      	<!-- 썸네일 라이브러리 -->
+      	<dependency>
+       	   	<groupId>net.coobird</groupId>
+          	<artifactId>thumbnailator</artifactId>
+          	<version>0.4.8</version>
+      	</dependency>
 	</dependencies>
     <build>
         <plugins>

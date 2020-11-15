@@ -3,39 +3,69 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="PoDao">
-<!--         <select id="list" resultType="PoVo">
-                select * from PURCHASEORDER order by PONUM
+
+		<!-- 중복되는 동적 SQL문에 대한 처리 -->
+		<!-- poStat변경 -->
+		<sql id="poStatCh">
+			<!-- 동적 SQL 구문 -->
+			<if test="poStat == 'orderconfirm'">
+				CONFIRMDATE=SYSDATE, POSTAT=#{poStat}
+			</if>
+			<if test="poStat == 'orderreject'">
+				REJECTDATE=SYSDATE, POSTAT=#{poStat}
+			</if>
+			<if test="poStat == 'ship'">
+				SHIPDATE=SYSDATE, POSTAT=#{poStat}
+			</if>
+			<if test="poStat == 'shipsuccess'">
+				RECIPIENTDATE=SYSDATE, POSTAT=#{poStat}
+			</if>
+			<if test="poStat == 'confirm'">
+				FCONFIRMDATE=SYSDATE, POSTAT=#{poStat}
+			</if>
+		</sql>
+
+        <select id="list" resultType="PoProductVo">
+                select * from PURCHASEORDER po, PRODUCT prod WHERE po.PRODSEQ = prod.PRODSEQ AND po.CUSSEQ=#{cusSeq}
         </select>
-        
-        주문 조회
+		<!-- 주문 조회 -->
         <select id="getPo" parameterType="int" resultType="PoVo">
                 select * from PURCHASEORDER where PONUM = #{poNum}
-        </select> -->
+        </select>
         
        	<!-- 주문 생성 -->
-<!--         <insert id="insert" parameterType="PoVo">
-                insert into PURCHASEORDER (PONUM,CUSID,PRODSEQ,POQUANTITY,PAYNUM,RECIPIENT,RECIPIENTPHONE,RECIPIENTADDR,SHIPMEMO,
-                COURIER,SHIPPINGNUM,POSTAT,BILLINGAMOUNT,ORDERDATE,PAYMETHOD)
-                values (PONUM_SEQ.nextval,#{cusId}, #{prodSeq}, #{poQuantity}, #{payNum}, #{recipient},#{recipientPhone}, #{recipientAddr},#{shipMemo}, 
-                		#{courier}, #{shippingNum}, #{poStat}, #{billingAmount}, SYSDATE, #{payMethod})
-        </insert> -->
         <insert id="insert" parameterType="PoVo">
-                insert into PURCHASEORDER (PONUM, CUSID, PRODSEQ, POQUANTITY,RECIPIENT,RECIPIENTPHONE,RECIPIENTADDR,SHIPMEMO,BILLINGAMOUNT,PAYMETHOD)
-                values (PONUM_SEQ.nextval,#{cusId}, #{prodSeq}, #{poQuantity}, #{recipient},#{recipientPhone}, #{recipientAddr},#{shipMemo}, #{billingAmount}, #{payMethod})
+                insert into PURCHASEORDER (PONUM, CUSSEQ, PRODSEQ, POQUANTITY,RECIPIENT,RECIPIENTPHONE,RECIPIENTADDR,SHIPMEMO,BILLINGAMOUNT,PAYMETHOD, POSTAT)
+                values (PONUM_SEQ.nextval,#{cusSeq}, #{prodSeq}, #{poQuantity}, #{recipient},#{recipientPhone}, #{recipientAddr},#{shipMemo}, #{billingAmount}, #{payMethod}, #{poStat})
         </insert>
- <!--        구매 확인
-        <update id="confirmupdate" parameterType="PoVo">
-                update PURCHASEORDER set CONFIRMDATE=sysdate
+        
+        <!-- 신규주문 확인 -->
+         <select id="newOrderlist" resultType="PoProductVo">
+                select * from PURCHASEORDER po, PRODUCT prod WHERE po.PRODSEQ = prod.PRODSEQ AND prod.SELLERSEQ=#{sellerSeq} AND po.POSTAT = 'newOrder'
+        </select>
+        
+        <!-- 발송필요주문 확인 -->
+         <select id="confirmOrderlist" resultType="PoProductVo">
+                select * from PURCHASEORDER po, PRODUCT prod WHERE po.PRODSEQ = prod.PRODSEQ AND prod.SELLERSEQ=#{sellerSeq} AND po.POSTAT = 'orderconfirm'
+        </select>
+        
+        <!-- 배송중또는 배송완료 주문 확인 -->
+         <select id="shipOrderlist" resultType="PoProductVo">
+                select * from PURCHASEORDER po, PRODUCT prod WHERE po.PRODSEQ = prod.PRODSEQ AND prod.SELLERSEQ=#{sellerSeq} AND po.POSTAT = 'ship' OR po.POSTAT='shipsuccess'
+        </select>
+        
+        <!-- 발송필요주문 확인 -->
+         <select id="poFconfirmOrderlist" resultType="PoProductVo">
+                select * from PURCHASEORDER po, PRODUCT prod WHERE po.PRODSEQ = prod.PRODSEQ AND prod.SELLERSEQ=#{sellerSeq} AND po.POSTAT = 'confirm'
+        </select>
+
+        <!-- PO상태 변경 --> 
+        <update id="update" parameterType="PoVo">
+                UPDATE PURCHASEORDER set <include refid="poStatCh"/>
                 where PONUM=#{poNum}
         </update>
 
-        발송완료 
-        <update id="shipupdate" parameterType="PoVo">
-                update PURCHASEORDER set SHIPDATE=sysdate
-                where PONUM=#{poNum}
-        </update>
-
-        수령완료 
+  <!--       수령완료 
         <update id="recipientupdate" parameterType="PoVo">
                 update PURCHASEORDER set RECIPIENTDATE=sysdate
                 where PONUM=#{poNum}

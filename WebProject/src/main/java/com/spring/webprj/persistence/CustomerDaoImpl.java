@@ -26,7 +26,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public void delete(int cusSeq) {
-		// TODO Auto-generated method stub
+		sqlSessionTemplate.selectOne("CustomerDao.delete",cusSeq);
 
 	}
 
@@ -36,6 +36,18 @@ public class CustomerDaoImpl implements CustomerDao {
 		System.out.println(cus);
 		sqlSessionTemplate.insert("CustomerDao.insert",cus);
 
+	}
+
+	@Override
+	public void update(CustomerVo cus) {
+		sqlSessionTemplate.update("CustomerDao.update", cus);
+		
+	}
+
+	@Override
+	public int checkCusId(String cusId) {
+		
+		return sqlSessionTemplate.selectOne("CustomerDao.checkCusId", cusId);
 	}
 
 }

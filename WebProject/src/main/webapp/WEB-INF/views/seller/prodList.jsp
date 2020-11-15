@@ -36,16 +36,18 @@
 			</div>
 		</div>
 		<div class="table-wrapper" style="margin-left:250px;margin-top:200px;margin-bottom:300px;overflow-x:auto;max-width:70% ">
-			<h4>판매자 메인페이지</h4>
+			<h4>상품 조회/수정</h4>
 			<br><br>
 			<table style="width:100%;" border="1">
 				<thead align="center"" style="height: 3em">
 					<tr style="height: 3em">
-					<th>제품번호</th>
+					<th style="width:100px">제품번호</th>
 					<th>제품명</th>
 					<th>제품가격</th>					
 					<th>할인금액</th>					
-					<th>배송비 재고</th>					
+					<th>배송비</th> 
+					<th>재고</th>
+					<th>수정</th>					
 					</tr>
 				</thead>
 				<tbody align="center" style="height: 3em">
@@ -55,7 +57,9 @@
 						<td>${ prod.prodName }</td>
 						<td>${ prod.price }</td>
 						<td>${ prod.discount }</td>
-						<td>${ prod.stock }</td>
+						<td>${ prod.shippingCharge }</td>
+						<td>${ prod.stockNumber }</td>
+						<td><button onclick = "location.href='<c:url value="/seller/prodModify/${prod.prodSeq}"/>'">수정</button></td>
 					</tr>
 				</c:forEach>
 				</tbody>
