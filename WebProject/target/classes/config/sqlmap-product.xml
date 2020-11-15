@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="ProductDao">
+		
+	<insert id="insert" parameterType="ProductVo">
+		INSERT INTO PRODUCT 
+		(PRODSEQ, SELLERSEQ, CATEGORY, PRODNAME, PRODINFO, PRICE, DISCOUNT, SHIPPINGCHARGE, STOCKNUMBER, PHOTOURL)
+		VALUES (PRODSEQ.nextval, #{sellerSeq}, #{category}, #{prodName}, #{prodInfo}, #{price}, #{discount}, #{shippingCharge}, #{stockNumber}, #{photoUrl}) 
+	</insert>
+
+	<select id="list" resultType="ProductVo">
+		SELECT *
+		FROM PRODUCT WHERE SELLERSEQ=#{sellerSeq}
+	</select>
+
+	<select id="getProd" resultType="ProductVo">
+		SELECT *
+		FROM PRODUCT
+		WHERE PRODSEQ=#{prodSeq} 
+	</select>
+
+	<update id="update">
+		UPDATE PRODUCT
+		SET CATEGORY=#{category}, PRODNAME=#{prodName}, PRODINFO=#{prodInfo}, PRICE=#{price}, DISCOUNT=#{discount}, SHIPPINGCHARGE=#{shippingCharge}, STOCKNUMBER=#{stockNumber}
+		WHERE PRODUCTSEQ=#{productSeq} 
+	</update>
+
+	<delete id="delete">
+		DELETE FROM PRODUCT
+		WHERE PRODUCTSEQ=#{productSeq} 
+	</delete>
+
+
+</mapper>
