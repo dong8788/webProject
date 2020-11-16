@@ -41,6 +41,13 @@ public class ProductSeviceImpl implements ProductService {
 		
 	}
 
+	@Override
+	public void update(ProductVo prod) {
+		System.out.println("prod update");
+		prodDao.update(prod);
+		
+	}
+
 
 
 }

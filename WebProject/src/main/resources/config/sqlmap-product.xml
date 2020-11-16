@@ -23,8 +23,8 @@
 
 	<update id="update">
 		UPDATE PRODUCT
-		SET CATEGORY=#{category}, PRODNAME=#{prodName}, PRODINFO=#{prodInfo}, PRICE=#{price}, DISCOUNT=#{discount}, SHIPPINGCHARGE=#{shippingCharge}, STOCKNUMBER=#{stockNumber}
-		WHERE PRODUCTSEQ=#{productSeq} 
+		SET CATEGORY=#{category}, PRODNAME=#{prodName}, PRODINFO=#{prodInfo}, PRICE=#{price}, DISCOUNT=#{discount}, SHIPPINGCHARGE=#{shippingCharge}, STOCKNUMBER=#{stockNumber}, UPDATEDATE=SYSDATE
+		WHERE PRODSEQ=#{prodSeq}
 	</update>
 
 	<delete id="delete">

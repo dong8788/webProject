@@ -42,10 +42,11 @@
 			<input type="hidden" name="sellerSeq" value="${login.sellerSeq }">
 			<table style="width:100%;" border="1">
 				<tr>
-					<td>카테고리</td>
+					<td style="width: 100px">카테고리</td>
 					<td>
 						<select name="category">
-						<option value="패션" selected="selected">패션</option>
+						<option value="" selected disabled hidden>선택해주세요.</option>
+						<option value="패션">패션</option>
 						<option value="잡화">잡화</option>
 						<option value="뷰티">뷰티</option>
 						<option value="주방">주방</option>

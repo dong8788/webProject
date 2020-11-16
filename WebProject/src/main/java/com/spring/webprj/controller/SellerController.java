@@ -87,7 +87,15 @@ public class SellerController {
 	@GetMapping("/prodModify/{prodSeq}")
 	public String prodModify(@PathVariable int prodSeq,Model model) {
 		model.addAttribute("prod", prodservice.getProd(prodSeq));
+		System.out.println(prodservice.getProd(prodSeq));
 		return "/seller/prodModify";
+	}
+
+	@PostMapping("/prodModify")
+	public String prodModify(ProductVo prod) {
+		System.out.println(prod);
+		prodservice.update(prod);
+		return "redirect:/seller/prodList";
 	}
 	
 	@GetMapping("/newOrder")
@@ -117,21 +125,22 @@ public class SellerController {
 	@PostMapping("/send")
 	public String send(@RequestParam(value="poNum") List<Integer> poNumList,
 			@RequestParam(name="poStat") String poStat,
-			@RequestParam(name="courier") String courier,
-			@RequestParam(name="shippingNum") String shippingNum,
+			@RequestParam(name="courier") List<String> courierList,
+			@RequestParam(name="shippingNum") List<String> shippingNumList,
 			Model model, HttpSession session) {
 		System.out.println("post : send");
 		System.out.println(poStat);
 		System.out.println(poNumList);
 		
-		
+		int i = 0;
 		for(int poNum : poNumList) {
 			PoVo po = poservice.getPo(poNum);
 			po.setPoStat(poStat);
-			po.setCourier(courier);
-			po.setShippingNum(shippingNum);
+			po.setCourier(courierList.get(i));
+			po.setShippingNum(shippingNumList.get(i));
 			System.out.println(po);
 			poservice.update(po);
+			i++;
 		}
 		
 		return "/seller/send";
@@ -148,22 +157,24 @@ public class SellerController {
 	
 	@PostMapping("/sendStat")
 	public String sendStat(@RequestParam(value="poNum") List<Integer> poNumList,
-			@RequestParam(name="courier") String courier,
-			@RequestParam(name="shippingNum") String shippingNum,
+			@RequestParam(name="courier") List<String> courierList,
+			@RequestParam(name="shippingNum") List<String> shippingNumList,
 			Model model, HttpSession session) {
 		System.out.println("post : sendStat 수정");
 		System.out.println(poNumList);
 		
-		
+		int i = 0;
 		for(int poNum : poNumList) {
+			
 			PoVo po = poservice.getPo(poNum);
-			po.setCourier(courier);
-			po.setShippingNum(shippingNum);
+			po.setCourier(courierList.get(i));
+			po.setShippingNum(shippingNumList.get(i));
 			System.out.println(po);
 			poservice.update(po);
+			i++;
 		}
 		
-		return "/seller/sendStat";
+		return "redirect:/seller/sendStat";
 	}
 	
 	@GetMapping("/sendStat")

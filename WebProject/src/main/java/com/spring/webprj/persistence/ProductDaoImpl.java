@@ -39,4 +39,11 @@ public class ProductDaoImpl implements ProductDao {
 
 	}
 
+	@Override
+	public void update(ProductVo prod) {
+		System.out.println("dao : prod update");
+		sqlSessionTemplate.insert("ProductDao.update", prod);
+		
+	}
+
 }

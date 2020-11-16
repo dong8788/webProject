@@ -15,7 +15,7 @@
 				REJECTDATE=SYSDATE, POSTAT=#{poStat}
 			</if>
 			<if test="poStat == 'ship'">
-				SHIPDATE=SYSDATE, POSTAT=#{poStat}
+				SHIPDATE=SYSDATE, POSTAT=#{poStat}, COURIER=#{courier}, SHIPPINGNUM=#{shippingNum}
 			</if>
 			<if test="poStat == 'shipsuccess'">
 				RECIPIENTDATE=SYSDATE, POSTAT=#{poStat}
@@ -61,7 +61,7 @@
 
         <!-- PO상태 변경 --> 
         <update id="update" parameterType="PoVo">
-                UPDATE PURCHASEORDER set <include refid="poStatCh"/>
+                UPDATE PURCHASEORDER set <include refid="poStatCh"/> 
                 where PONUM=#{poNum}
         </update>
 

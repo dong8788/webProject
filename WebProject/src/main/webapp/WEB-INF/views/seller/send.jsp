@@ -38,7 +38,7 @@
 		<div class="table-wrapper" style="margin-left:250px;margin-top:200px;margin-bottom:300px;overflow-x:auto;max-width:70% ">
 			<h4>발송 처리</h4>
 			<br><br>
-			<form action="<c:url value='/seller/send'/>" method="post">
+			<form name="frmJoin" onSubmit="return CheckForm(this)" action="<c:url value='/seller/send'/>" method="post">
 			<input type="hidden" class="poStat" name="poStat" value="">
 			<table style="width:100%;" border="1">
 				<thead align="center" style="height: 3em">
@@ -86,7 +86,27 @@
 	$('.confirmBtn').on('click',function(){
 			$('.poStat').attr('value','ship');
 	 });
+	
+	function CheckForm(Join){
 
+
+
+		var ispoNumChk = false;
+		var arr_poNum = document.getElementsByName("poNum");
+		for(var i=0;i<arr_poNum.length;i++){
+		    if(arr_poNum[i].checked == true) {
+		        ispoNumChk = true;
+		        break;
+		    }
+		}
+		
+		if(!ispoNumChk){
+		    alert("한개 주문 이상 선택해주세요.");
+		    return false;
+		}
+	}
+	
 	</script>
+
 </html>
 <jsp:include page="../include/footer.jsp" />

@@ -19,5 +19,8 @@ public interface ProductService {
 	
 	//Product 생성기능
 	public void insert(ProductVo prod);
+
+	//Product 수정기능
+	public void update(ProductVo prod);
 	
 }
