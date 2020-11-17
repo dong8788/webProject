@@ -62,9 +62,11 @@
 								<li class="checkout">
 									<a href="<c:url value='/mypage/cart'/>">
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-										<span id="checkout_items" class="checkout_items">
-										${cartSize }
-										</span>	
+										<c:if test='${cartSize!=null }'>
+											<span id="checkout_items" class="checkout_items">
+											${cartSize }
+											</span>	
+										</c:if>
 									</a>
 								</li>
 								</c:if>

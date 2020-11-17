@@ -18,7 +18,6 @@
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
 						<li><a href="index.html">Home</a></li>
-						<li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
 						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Single Product</a></li>
 					</ul>
 				</div>
@@ -34,8 +33,6 @@
 							<div class="single_product_thumbnails">
 								<ul>
 									<li><img src="<c:url value='/images/single_1_thumb.jpg'/>" alt="" data-image="<c:url value='/images/single_1.jpg'/>"></li>
-									<li class="active"><img src="<c:url value='/images/single_2_thumb.jpg'/>" alt="" data-image="<c:url value='/images/single_2.jpg'/>"></li>
-									<li><img src="<c:url value='/images/single_3_thumb.jpg'/>" alt="" data-image="<c:url value='/images/single_3.jpg'/>"></li>
 								</ul>
 							</div>
 						</div>
@@ -50,14 +47,19 @@
 			<div class="col-lg-5">
 				<div class="product_details">
 					<div class="product_details_title">
-						<h2>Pocket cotton sweatshirt</h2>
-						<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
+						<h2>${ product.prodName }</h2>
+						<p>${ product.prodInfo }</p>
 					</div>
 					<div class="free_delivery d-flex flex-row align-items-center justify-content-center">
+						<c:if test="${ product.shippingCharge == 0 }">
 						<span class="ti-truck"></span><span>free delivery</span>
+						</c:if>
+						<c:if test="${ product.shippingCharge != 0 }">
+						<span class="ti-truck"></span><span>${ product.shippingCharge }</span>
+						</c:if>
 					</div>
-					<div class="original_price">12000원</div>
-					<div class="product_price">10000원</div>
+					<div class="original_price">${ product.price }</div>
+					<div class="product_price">${ product.price - product.discount }</div>
 					<ul class="star_rating">
 						<li><i class="fa fa-star" aria-hidden="true"></i></li>
 						<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -84,7 +86,7 @@
 						<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
 					</div>
 					<div>
-						<div class="red_button shop_now_button"><a href="<c:url value='/product/po'/>">shop now</a></div>
+						<div class="red_button shop_now_button"><a href="<c:url value='/product/po/${ product.prodSeq }'/>">shop now</a></div>
 					</div>
 				</div>
 			</div>
@@ -128,36 +130,7 @@
 					<!-- Tab Description -->
 
 					<div id="tab_1" class="tab_container active">
-						<div class="row">
-							<div class="col-lg-5 desc_col">
-								<div class="tab_title">
-									<h4>Description</h4>
-								</div>
-								<div class="tab_text_block">
-									<h2>Pocket cotton sweatshirt</h2>
-									<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
-								</div>
-								<div class="tab_image">
-									<img src="<c:url value='/images/desc_1.jpg'/>" alt="">
-								</div>
-								<div class="tab_text_block">
-									<h2>Pocket cotton sweatshirt</h2>
-									<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
-								</div>
-							</div>
-							<div class="col-lg-5 offset-lg-2 desc_col">
-								<div class="tab_image">
-									<img src="<c:url value='/images/desc_2.jpg'/>" alt="">
-								</div>
-								<div class="tab_text_block">
-									<h2>Pocket cotton sweatshirt</h2>
-									<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
-								</div>
-								<div class="tab_image desc_last">
-									<img src="<c:url value='/images/desc_3.jpg'/>" alt="">
-								</div>
-							</div>
-						</div>
+						${ product.prodInfo }
 					</div>
 
 					<!-- 문의사항 -->

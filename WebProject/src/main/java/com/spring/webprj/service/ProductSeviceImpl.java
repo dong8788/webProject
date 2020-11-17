@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.webprj.common.SearchVO;
 import com.spring.webprj.domain.ProductVo;
 import com.spring.webprj.persistence.ProductDao;
 
@@ -16,9 +17,19 @@ public class ProductSeviceImpl implements ProductService {
 	private ProductDao prodDao;
 	
 	@Override
-	public List<ProductVo> list(int sellerSeq) {
+	public List<ProductVo> listBySellerSeq(int sellerSeq) {
 		System.out.println("prodlist");
-		return prodDao.list(sellerSeq);
+		return prodDao.listBySellerSeq(sellerSeq);
+	}
+	
+	@Override
+	public List<ProductVo> list(SearchVO search) {
+		return prodDao.list(search);
+	}
+	
+	@Override
+	public int listCount(SearchVO search) {
+		return prodDao.listCount(search);
 	}
 
 	@Override

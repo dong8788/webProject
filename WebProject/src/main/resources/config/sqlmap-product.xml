@@ -3,6 +3,20 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="ProductDao">
+
+	<sql id="search">
+		<!-- 동적 SQL 구문 -->
+		<if test="condition == 'writer'">
+			AND cenquery.TITLE LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="condition == 'content'">
+			AND cenquery.CONTENT LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="condition == 'reply'">
+			AND cenquery.REPLY LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+	</sql>
+
 		
 	<insert id="insert" parameterType="ProductVo">
 		INSERT INTO PRODUCT 
@@ -10,9 +24,20 @@
 		VALUES (PRODSEQ.nextval, #{sellerSeq}, #{category}, #{prodName}, #{prodInfo}, #{price}, #{discount}, #{shippingCharge}, #{stockNumber}, #{photoUrl}) 
 	</insert>
 
-	<select id="list" resultType="ProductVo">
+	<select id="listBySellerSeq" resultType="ProductVo">
 		SELECT *
 		FROM PRODUCT WHERE SELLERSEQ=#{sellerSeq}
+	</select>
+
+	<select id="list" parameterType="SearchVO" resultType="ProductVo">
+		SELECT * FROM (SELECT ROWNUM AS RNUM, PRODSEQ, SELLERSEQ, CATEGORY, 
+		PRODNAME, PRODINFO, PRICE, DISCOUNT, SHIPPINGCHARGE, STOCKNUMBER, PHOTOURL FROM PRODUCT) a 
+		WHERE RNUM between #{rowStart} and #{rowEnd} 
+	</select>
+
+	<select id="listCount" parameterType="SearchVO" resultType="int">
+		
+		SELECT COUNT(*) FROM (SELECT * FROM PRODUCT)
 	</select>
 
 	<select id="getProd" resultType="ProductVo">

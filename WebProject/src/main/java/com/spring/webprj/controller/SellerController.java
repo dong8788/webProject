@@ -78,7 +78,7 @@ public class SellerController {
 	
 	@GetMapping("/prodList")
 	public void prodList(Model model, HttpSession session) {
-		List<ProductVo> prodList = prodservice.list(sellerservice.select(((SellerVo)session.getAttribute("login")).getId()).getSellerSeq());
+		List<ProductVo> prodList = prodservice.listBySellerSeq(sellerservice.select(((SellerVo)session.getAttribute("login")).getId()).getSellerSeq());
 		System.out.println("get : prodList");
 		System.out.println(prodList);
 		model.addAttribute("prodList", prodList);
