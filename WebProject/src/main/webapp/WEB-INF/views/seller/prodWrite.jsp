@@ -38,7 +38,7 @@
 		<div class="table-wrapper" style="margin-left:250px;margin-top:200px;margin-bottom:300px;overflow-x:auto;max-width:70% ">
 			<h4>상품 등록</h4>
 			<br><br>
-			<form action="${pageContext.request.contextPath}/seller/prodWrite" method="post">
+			<form action="${pageContext.request.contextPath}/seller/prodWrite" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="sellerSeq" value="${login.sellerSeq }">
 			<table style="width:100%;" border="1">
 				<tr>
@@ -62,22 +62,7 @@
 					<td>제품사진</td>
 					<td>
 						<div class="inputArea">
-						<label for="photoUrl">이미지</label>
-					 	<input type="file" id="photoUrl" name="file" />
-					 	<div class="select_img"><img src="" /></div>
-					 
-						 	<script>
-						  	$("#photoUrl").change(function(){
-						   	if(this.files && this.files[0]) {
-						    	var reader = new FileReader;
-						    	reader.onload = function(data) {
-						     $(".select_img img").attr("src", data.target.result).width(500);        
-						    	}
-						    	reader.readAsDataURL(this.files[0]);
-						   	}
-						  	});
-						 	</script>
-						 		<%=request.getRealPath("/src/main/webapp/resources/images") %>
+						 	<input type="file" id="photoUrl" name="file" />
 						</div>
 					</td>
 				</tr>

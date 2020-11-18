@@ -6,6 +6,9 @@ import com.spring.webprj.domain.SellerVo;
 
 public interface SellerDao {
 
+	//id 중복체크
+	public int sellerIdChk(SellerVo vo) throws Exception;
+	
 	//Seller 리스트를 가져오기 위한 기능
 	public List<SellerVo> selectAll();
 	

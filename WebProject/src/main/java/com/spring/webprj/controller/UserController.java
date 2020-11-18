@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,6 +25,16 @@ import com.spring.webprj.service.SellerService;
 @RequestMapping("/user")
 public class UserController {
 
+	
+	@ResponseBody
+	@RequestMapping(value="/sellerIdChk", method = RequestMethod.POST)
+	public int sellerIdChk(SellerVo vo) throws Exception{
+		System.out.println(vo);
+		int result = sellservice.sellerIdChk(vo);
+		return result;
+	}
+	
+	
 	@Autowired
 	private CustomerService cusservice;
 	

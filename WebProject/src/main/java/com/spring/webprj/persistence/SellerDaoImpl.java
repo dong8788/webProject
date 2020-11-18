@@ -2,6 +2,9 @@ package com.spring.webprj.persistence;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,6 +14,15 @@ import com.spring.webprj.domain.SellerVo;
 @Repository
 public class SellerDaoImpl implements SellerDao {
 
+	@Override
+	public int sellerIdChk(SellerVo vo) throws Exception{
+		System.out.println("IdChk");
+		int result = sql.selectOne("SellerDao.sellerIdChk", vo);
+		return result;
+	}
+	
+	@Inject SqlSession sql;
+	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	

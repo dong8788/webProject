@@ -12,13 +12,14 @@
 	<div class="po" style="width:500px;margin-top:200px;margin-left:auto;margin-right:auto">
 		결제 내역<br>
 		<br>
+		<form action="<c:url value='/product/po'/>" method="post">
 		제품 명 : 점퍼<br>
 		상품 가격 : 10,000원<br>
 		배송비 : 2,500원<br>
 		총 결제 금액 : 12,500원<br>
 		<br><br>
 		배송 정보<br>
-		<form action="<c:url value='/product/po'/>" method="post">
+		
 			<input type="hidden" name="prodSeq" value=26>
 			<input type="hidden" name="poQuantity" value=1>
 			<input type="hidden" name="payNum" value=1>

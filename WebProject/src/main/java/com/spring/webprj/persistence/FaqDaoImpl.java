@@ -27,12 +27,12 @@ public class FaqDaoImpl implements FaqDao {
 
 	@Override
 	public FaqVo select(int faqSeq) {
-		return sqlSessionTemplate.selectOne("FaqDao.selectAll", faqSeq);
+		return sqlSessionTemplate.selectOne("FaqDao.select", faqSeq);
 	}
 
 	@Override
 	public void delete(int faqSeq) {
-		sqlSessionTemplate.delete("FaqDao.delete");
+		sqlSessionTemplate.delete("FaqDao.delete", faqSeq);
 	}
 
 	@Override

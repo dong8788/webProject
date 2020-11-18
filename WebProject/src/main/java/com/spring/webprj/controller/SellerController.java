@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,23 +58,18 @@ public class SellerController {
 	
 	@PostMapping("/prodWrite")
 	public String prodWrite(ProductVo prod, MultipartFile file) throws Exception {
-		String imgUploadPath = uploadPath;
-		String fileName = null;
-		System.out.println("post : prodwrite");
-		System.out.println(prod);
-		
-		if(file != null) {
-		fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes()); 
-	} else {
-//		fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
-		fileName = uploadPath + File.separator + "none.png";
-	}
-	
-		prod.setPhotoUrl(fileName);
-	
+		String imgUploadPath = uploadPath + File.separator + "imgUpload"; 
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath); String fileName = null;
+		if(file != null) { 
+			fileName = UploadFileUtils.fileUpload(imgUploadPath,file.getOriginalFilename(), file.getBytes(), ymdPath); 
+			} else { 
+				fileName = uploadPath + File.separator + "images" + File.separator + "none.png"; 
+			}
+			     
+		prod.setPhotoUrl(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 		prodservice.insert(prod);
-		
-		return "/seller/main";
+		System.out.println(prod);
+		return "redirect:/seller/prodList";
 	}
 	
 	@GetMapping("/prodList")
@@ -92,7 +88,24 @@ public class SellerController {
 	}
 
 	@PostMapping("/prodModify")
-	public String prodModify(ProductVo prod) {
+	public String prodModify(ProductVo prod, MultipartFile file, HttpServletRequest req) throws Exception {
+		// 새로운 파일이 등록되었는지 확인
+	    if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+	    	// 기존 파일을 삭제(확인)
+	    	new File(uploadPath + req.getParameter("photoUrl")).delete();
+	         
+	        // 새로 첨부한 파일을 등록
+	        String imgUploadPath = uploadPath + File.separator + "imgUpload";
+	        String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+	        String fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+	         
+	        prod.setPhotoUrl(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+	         
+	      } else {  
+	    	 // 새로운 파일이 등록되지 않았다면 기존 이미지를 그대로 사용
+	         prod.setPhotoUrl(req.getParameter("photoUrl"));
+	      }
+
 		System.out.println(prod);
 		prodservice.update(prod);
 		return "redirect:/seller/prodList";

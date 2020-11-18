@@ -32,19 +32,20 @@
 						<div class="col-lg-3 thumbnails_col order-lg-1 order-2">
 							<div class="single_product_thumbnails">
 								<ul>
-									<li><img src="<c:url value='/images/single_1_thumb.jpg'/>" alt="" data-image="<c:url value='/images/single_1.jpg'/>"></li>
+									<li><img src="${pageContext.request.contextPath}/resources/${productVo.photoUrl}" alt="" data-image="${pageContext.request.contextPath}/resources/${productVo.photoUrl}"></li>
 								</ul>
 							</div>
 						</div>
 						<div class="col-lg-9 image_col order-lg-2 order-1">
 							<div class="single_product_image">
-								<div class="single_product_image_background" style="background-image:url(<c:url value='/images/single_2.jpg'/>)"></div>
+								<div class="single_product_image_background" style="background-image:url(${pageContext.request.contextPath}/resources/${productVo.photoUrl})"></div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-lg-5">
+				<form action="" method="post"></form>
 				<div class="product_details">
 					<div class="product_details_title">
 						<h2>${ product.prodName }</h2>
@@ -86,7 +87,7 @@
 						<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
 					</div>
 					<div>
-						<div class="red_button shop_now_button"><a href="<c:url value='/product/po/${ product.prodSeq }'/>">shop now</a></div>
+						<div class="red_button shop_now_button"><button>shop now</button></div>
 					</div>
 				</div>
 			</div>
@@ -130,7 +131,8 @@
 					<!-- Tab Description -->
 
 					<div id="tab_1" class="tab_container active">
-						${ product.prodInfo }
+						<img src="${pageContext.request.contextPath}/resources/${productVo.photoUrl}"/>
+						${ product.prodInfo  }
 					</div>
 
 					<!-- 문의사항 -->
@@ -217,49 +219,50 @@
 								
 								<c:forEach var="review" items="${reviewList}" varStatus="loop">
 										 
-												<div class="user_pic"></div>
-												<div class="user_rating">
-													<ul class="star_rating">
-														<c:if test="${review.score > 0}">
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														</c:if>														
-														<c:if test="${review.score == 0}">
-															<li><i class="fa fa-star" aria-hidden="false"></i></li>
-														</c:if>
-														<c:if test="${review.score > 1}">
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														</c:if>														
-														<c:if test="${review.score <= 1}">
-															<li><i class="fa fa-star" aria-hidden="false"></i></li>
-														</c:if>
-														<c:if test="${review.score > 2}">
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														</c:if>														
-														<c:if test="${review.score <= 2}">
-															<li><i class="fa fa-star" aria-hidden="false"></i></li>
-														</c:if>
-														<c:if test="${review.score > 3}">
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														</c:if>														
-														<c:if test="${review.score <= 3}">
-															<li><i class="fa fa-star" aria-hidden="false"></i></li>
-														</c:if>
-														<c:if test="${review.score > 4}">
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														</c:if>														
-														<c:if test="${review.score <= 4}">
-															<li><i class="fa fa-star" aria-hidden="false"></i></li>
-														</c:if>
-													</ul>
-												</div>
-											</div>
-											<div class="review">
-												<div class="review_date">${review.regDate }</div>
-												<div class="user_name">${ review.cusId }</div>
-												<p>${review.content }</p>
-											</div>
+									<div class="user_pic"></div>
+										<div class="user_rating">
+											<ul class="star_rating">
+												<c:if test="${review.score > 0}">
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												</c:if>														
+												<c:if test="${review.score == 0}">
+													<li><i class="fa fa-star" aria-hidden="false"></i></li>
+												</c:if>
+												<c:if test="${review.score > 1}">
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												</c:if>														
+												<c:if test="${review.score <= 1}">
+													<li><i class="fa fa-star" aria-hidden="false"></i></li>
+												</c:if>
+												<c:if test="${review.score > 2}">
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												</c:if>														
+												<c:if test="${review.score <= 2}">
+													<li><i class="fa fa-star" aria-hidden="false"></i></li>
+												</c:if>
+												<c:if test="${review.score > 3}">
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												</c:if>														
+												<c:if test="${review.score <= 3}">
+													<li><i class="fa fa-star" aria-hidden="false"></i></li>
+												</c:if>
+												<c:if test="${review.score > 4}">
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												</c:if>														
+												<c:if test="${review.score <= 4}">
+													<li><i class="fa fa-star" aria-hidden="false"></i></li>
+												</c:if>
+											</ul>
 										</div>
+									</div>
+									<div class="review">
+										<div class="review_date">${review.regDate }</div>
+										<div class="user_name">${ review.cusId }</div>
+										<p>${review.content }</p>
+									</div>
 									</c:forEach>
+								</div>
+									
 							</div>
 
 							<!-- Add Review -->

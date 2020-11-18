@@ -45,7 +45,7 @@ public class FaqServiceImpl implements FaqService {
 	
 	@Override
 	public void update(FaqVo faq) {
-		faqDao.insert(faq);
+		faqDao.update(faq);
 		
 	}
 

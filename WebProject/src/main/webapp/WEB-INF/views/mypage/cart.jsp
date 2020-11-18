@@ -34,6 +34,8 @@
 		<div class="table-wrapper" style="margin-left:250px;margin-top:200px;margin-bottom:300px;overflow-x:auto;max-width:70% ">
 			<h4>장바구니</h4>
 			<br><br>
+			<form action="" method="post">
+			<input type="hidden" name="cusId" value="${ login.cusId }">
 			<table style="width:100%;">
 				<thead align="center"" style="">
 					<tr>
@@ -46,15 +48,17 @@
 						<th></th>
 					</tr>
 				</thead>
+				
 				<tbody align="center">
 				<c:forEach var="cartProduct" items="${ cartProductList }" varStatus="loop">
+				<input type="hidden" name="prodSeq" value="${ cartProduct.prodSeq }">
 					<tr>
 						<td></td>
 						<td>${cartProduct.prodName}</td>
 						<td>${cartProduct.price - cartProduct.discount}</td>
 						<td>${cartProduct.shippingCharge}</td>
-						<td>${cartProduct.poQuantity}</td>
-						<td class="row_value">${cartProduct.poQuantity*(cartProduct.price - cartProduct.discount + cartProduct.shippingCharge)}</td>						
+						<td><input type="text" name="poQuantity" value="${cartProduct.poQuantity}" readonly="readonly"></td>
+						<td class="row_value"><input type="text" name="billingAmount" value="${cartProduct.poQuantity*(cartProduct.price - cartProduct.discount + cartProduct.shippingCharge)}" readonly="readonly"></td>						
 						<td><button type="button" onclick="location.href='<c:url value="/mypage/cartDelete/${ cartProduct.cartSeq }"/>'">삭제</button></td>
 					</tr>
 				</c:forEach>
@@ -63,6 +67,7 @@
 				</tr>
 				</tbody>
 			</table>
+			<div align="right"><input type="submit" value="구매하기"></div>
 			</form>
 		</div>
 	</div>

@@ -9,18 +9,28 @@
 	</select>
 
 	<select id="select" resultType="SellerVo">
-		SELECT * FROM SELLER WHERE ID=#{id}
+		SELECT * FROM SELLER WHERE
+		ID=#{id}
 	</select>
 
 	<select id="checkSellerId" resultType="int">
-		SELECT COUNT(*) FROM SELLER WHERE ID=#{id}
+		SELECT COUNT(*) FROM
+		SELLER WHERE ID=#{id}
 	</select>
-	
+
 	<insert id="insert" parameterType="SellerVo">
-		INSERT INTO SELLER("SELLERSEQ", "BUSINESSNAME", "NAME", "PHONE", "ADDR", "EMAIL", "ID", "PASSWORD", "BUSINESSNUM")
-		VALUES (SELLERSEQ.nextval, #{businessName}, #{name}, #{phone}, #{addr}, #{email}, #{id}, #{password}, #{businessNum})
+		INSERT INTO
+		SELLER("SELLERSEQ", "BUSINESSNAME", "NAME", "PHONE", "ADDR", "EMAIL",
+		"ID", "PASSWORD", "BUSINESSNUM")
+		VALUES (SELLERSEQ.nextval,
+		#{businessName}, #{name}, #{phone}, #{addr}, #{email}, #{id},
+		#{password}, #{businessNum})
 	</insert>
-	
-		
+
+
+	<select id="sellerIdChk" resultType="int">
+		SELECT COUNT(*) FROM SELLER
+		WHERE ID = #{id}
+	</select>
 
 </mapper>

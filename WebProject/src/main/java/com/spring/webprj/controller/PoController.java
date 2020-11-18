@@ -93,17 +93,20 @@ public class PoController {
 	}
 	
 	@PostMapping("/po")
-	public String order(PoVo po, HttpSession session, Model model) {
+	public String order(List<PoVo> poList, HttpSession session, Model model) {
 		System.out.println("post: po");
-		System.out.println(po.getCusSeq());
-		service.insert(po);
+		//String 
+		for(PoVo po : poList) {
+			
+		}
+		//service.insert(po);
 		if(session.getAttribute("login") != null) {
 			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
 			model.addAttribute("cartSize", cartSize);
 		}
-		return "product/po";
+		return "redirect:/mypage/polist";
 	}
-	
+
 	@PostMapping("/query")
 	public String query(QueryVo query) {
 		System.out.println("post: query");

@@ -122,7 +122,7 @@ public class CsController {
 	public String faqUpdate(FaqVo faqVo, @PathVariable int seq) {
 		System.out.println("updated faqVo : " + faqVo);
 		faqservice.update(faqVo);
-		return "redirect:/cs/faq/update/";
+		return "redirect:/cs/faq";
 	}
 	//FAQ 끝
 	

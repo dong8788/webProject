@@ -38,7 +38,7 @@
 		<div class="table-wrapper" style="margin-left:250px;margin-top:200px;margin-bottom:300px;overflow-x:auto;max-width:70% ">
 			<h4>상품 등록</h4>
 			<br><br>
-			<form action="${pageContext.request.contextPath}/seller/prodModify" method="post">
+			<form action="${pageContext.request.contextPath}/seller/prodModify" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="sellerSeq" value="${ login.sellerSeq }">
 			<input type="hidden" name="prodSeq" value="${ prod.prodSeq }">
 			<table style="width:100%;" border="1">
@@ -59,10 +59,12 @@
 					<td><input type="text" name="prodName"  value="${ prod.prodName }"></td>
 				</tr>
 				<tr>
-					<td>제품사진</td>
-					<td>
-					 	<div class="select_img"><img src="<c:url value='${ prod.photoUrl }'/>" /></div>
-					</td>
+				<tr>
+   					<td>제품사진</td>
+   					<td>
+   						<input type="file" id="photoUrl" name="file" />
+					 	<div class="select_img"><img src="${pageContext.request.contextPath}/${ prod.photoUrl }" /></div>
+					 </td>
 				</tr>
 				<tr>
 					<td>제품정보</td>

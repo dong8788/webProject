@@ -2,6 +2,9 @@ package com.spring.webprj.service;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,7 +15,18 @@ import com.spring.webprj.persistence.SellerDao;
 @Service
 public class SellerServiceImpl implements SellerService {
 
+	
+	@Override
+	public int sellerIdChk(SellerVo vo) throws Exception {
+		int result = sellerDao.sellerIdChk(vo);
+		return result;
+	}
+	
 	@Autowired
+	private SqlSessionTemplate sellSqlSession;
+	
+	
+	@Inject
 	private SellerDao sellerDao;
 	
 	@Override

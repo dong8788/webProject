@@ -25,9 +25,9 @@
 		</div>
 		<div class="table-wrapper" style="margin-left:250px;margin-top:200px;overflow-x:auto;max-width:70% ">
 			<div><h4>FAQ</h4></div>
-			<div  style="margin-top: 6px"">
+			<div  style="margin-top: 6px">
 				<table style="width:100%;">
-					<thead align="center"" >
+					<thead align="center">
 						<tr>
 							<th>번호</th>
 							<th>제목</th>
@@ -40,7 +40,10 @@
 					<c:forEach var="faq" items="${faqList}" varStatus="loop">
 						<tr style="height: 2em">
 							<td>${faq.faqSeq}</td>
-							<td>${faq.query}</td>
+							<td>
+								<a href="<c:url value="/cs/faq/view/${faq.getFaqSeq()}"/>">
+								${faq.query}</a>
+							</td>
 							<td>운영자</td>
 							<td>${faq.regDate}</td>
 							<td></td>
@@ -73,12 +76,10 @@
 					<option value="etc">기타</option>
 				</select>
 				<input type="text" placeholder="검색" name="keyword">
-				<button type="button" onclick="location.href='/cs/notice/search'">검색하기</button>
-				<c:if test="${seller1 == null }">
-					<c:if test="${login.cusId == 'admin'}">
-					<button type="button" onclick="rocation.href='<c:url value="/cs/notice/write"/>'">작성하기</button>
-					</c:if>	
-				</c:if>
+				<button type="button" onclick="location.href='/cs/faq	'">검색하기</button>
+				<c:if test="${login.cusId == 'admin'}">
+				<button type="button" onclick="location.href='<c:url value="/cs/faq/insert"/>'">작성하기</button>
+				</c:if>	
 			</div>
 			
 		</div>

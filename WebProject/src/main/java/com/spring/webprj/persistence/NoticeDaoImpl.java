@@ -28,12 +28,12 @@ public class NoticeDaoImpl implements NoticeDao {
 
 	@Override
 	public NoticeVo selectBySeq(int noticeSeq) {
-		return sqlSessionTemplate.selectOne("NoticeDao.select", noticeSeq);
+		return sqlSessionTemplate.selectOne("NoticeDao.selectBySeq", noticeSeq);
 	}
 
 	@Override
 	public void delete(int noticeSeq) {
-		sqlSessionTemplate.delete("NoticeDao.delete");
+		sqlSessionTemplate.delete("NoticeDao.delete", noticeSeq);
 
 	}
 
