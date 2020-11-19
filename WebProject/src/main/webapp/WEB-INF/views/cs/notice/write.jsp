@@ -78,7 +78,7 @@
 				</td>
 			</tr>
 		</table>
-		<button type="submit">등록</button>
+		<div align="right"><button type="submit">등록</button></div>
 		</form>
 		</div>
 	</div>

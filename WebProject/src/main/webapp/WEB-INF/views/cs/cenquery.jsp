@@ -41,7 +41,7 @@
 						<c:forEach var="userCenQuery" items="${userCenQueryList}" varStatus="loop">
 							<tr style="height: 2em">
 								<td>${userCenQuery.cenQuerySeq}</td>
-								<td>${userCenQuery.title}</td>
+								<td><a href="<c:url value='/cs/cenquery/view/${userCenQuery.cenQuerySeq}'/>">${userCenQuery.title}</a></td>
 								<c:if test="${userCenQuery.sellerSeq == 0}">
 									<td>고객 ${userCenQuery.cusId }</td>
 								</c:if>
@@ -71,23 +71,20 @@
 				   	 	</c:if> 
 				  	
 				</div>
-			
+			<form role="form" method="get" action="<c:url value='/cs/cenquery'/>">
 			<div align="right" style="margin-bottom: 3px; margin-top: 3px">
-				<select>
-					<option value="title">가입</option>
-					<option value="">고객</option>
-					<option value="seller">판매자</option>
-					<option value="etc">기타</option>
+				<select name='condition'>
+					<option value="title">제목</option>
+					<option value="content">내용</option>
+					<option value="titleContent">제목+내용</option>
 				</select>
 				<input type="text" placeholder="검색" name="keyword">
-				<button type="button" onclick="location.href='/cs/notice/search'">검색하기</button>
-				<c:if test="${seller1 == null }">
-					<c:if test="${login.cusId == 'admin'}">
-						<button type="button" onclick="rocation.href='<c:url value="/cs/noticeWrite"/>'">작성하기</button>
-					</c:if>	
+				<button type="submit">검색하기</button>
+				<c:if test="${ login != null }">
+					<button type="button" onclick="location.href='<c:url value="/cs/cenquery/write"/>'">작성하기</button>
 				</c:if>
 			</div>
-			
+			</form>
 		</div>
 	</div>
 </body>

@@ -59,6 +59,7 @@ public class CsController {
 		System.out.println("검색어 : "+ search.getKeyword());
 		System.out.println("rowStart : "+ search.getRowStart());
 		System.out.println("rowEnd : "+ search.getRowEnd());
+		System.out.println(search);
 		
 		List<CenQueryVo> cenQueryList = cenQueryservice.list(search);
 		pm.setTotalCount(cenQueryservice.listCount(search));
@@ -68,6 +69,35 @@ public class CsController {
 		model.addAttribute("pageMaker", pm);
 		
 		return "cs/cenquery";
+	}
+	
+	@GetMapping("/cenquery/write")
+	public String cenqueryWrite(HttpSession session, Model model) {
+		if(session.getAttribute("seller1") == null && session.getAttribute("login") != null) {
+			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
+			model.addAttribute("cartSize", cartSize);
+		}
+		
+		return "cs/cenquery/write";
+	}
+	
+	@PostMapping("/cenquery/write")
+	public String cenqueryWrite(CenQueryVo cenquery) {
+		System.out.println(cenquery);
+		cenQueryservice.insert(cenquery);
+		return "redirect:/cs/cenquery";
+	}
+	
+	@GetMapping("/cenquery/view/{cenQuerySeq}")
+	public String cenqueryView(@PathVariable int cenQuerySeq, HttpSession session, Model model) {
+		if(session.getAttribute("seller1") == null && session.getAttribute("login") != null) {
+			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
+			model.addAttribute("cartSize", cartSize);
+		}
+		
+		model.addAttribute("cenquery", cenQueryservice.read(cenQuerySeq));
+		
+		return "cs/cenquery/view";
 	}
 
 	//FAQ
