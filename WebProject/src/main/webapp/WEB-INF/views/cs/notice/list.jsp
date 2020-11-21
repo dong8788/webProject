@@ -76,7 +76,7 @@
 					<option value="titleContent">제목+내용</option>
 				</select>
 				<input type="text" placeholder="검색" name="keyword">
-				<button type="button" onclick="location.href='/cs/notice/search'">검색하기</button>
+				<button type="submit">검색하기</button>
 				<c:if test="${seller1 == null}">
 					<c:if test="${login.cusId == 'admin'}">
 						<button type="button" onclick="location.href='<c:url value="/cs/notice/write"/>'">작성하기</button>

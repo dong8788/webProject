@@ -22,8 +22,7 @@
 		INSERT INTO
 		SELLER("SELLERSEQ", "BUSINESSNAME", "NAME", "PHONE", "ADDR", "EMAIL",
 		"ID", "PASSWORD", "BUSINESSNUM")
-		VALUES (SELLERSEQ.nextval,
-		#{businessName}, #{name}, #{phone}, #{addr}, #{email}, #{id},
+		VALUES (SELLERSEQ.nextval,	#{businessName}, #{name}, #{phone}, #{addr, jdbcType=VARCHAR}, #{email}, #{id},
 		#{password}, #{businessNum})
 	</insert>
 
