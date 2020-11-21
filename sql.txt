@@ -111,7 +111,7 @@ create sequence "REVIEWSEQ" start with 1 increment by 1 maxvalue 99999;
 
     create table "REVIEW"(
    "REVIEWSEQ"  number primary key,
-   "RPODSEQ"    number,
+   "PRODSEQ"    number,
    "CUSID"      VARCHAR2(50)   NOT NULL,
    "SCORE"      NUMBER         NOT NULL,
    "TITLE"      varchar2(50)   NOT NULL,
