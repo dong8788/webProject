@@ -21,6 +21,8 @@
 	<resources mapping="/css/**" location="/resources/css/" />
 	<resources mapping="/scss/**" location="/resources/scss/" />
 	<resources mapping="/vendor/**" location="/resources/vendor/" />
+	<!-- 일반 파일 업로드 경로 -->
+	<resources mapping="/imgUpload/**" location="/resources/imgUpload/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -30,12 +32,15 @@
 	
 	<!-- 업로드 패스 설정 --> 
 	<beans:bean class="java.lang.String" id="uploadPath">
- 		<beans:constructor-arg value="\src\main\webapp\resources\images" />
+ 		<beans:constructor-arg value="C:\Users\dong8\Desktop\웹프로젝트\webProject\WebProject\src\main\webapp\resources" />
 	</beans:bean>
 
-	<!-- 일반 파일 업로드 경로 -->
-	<resources mapping="/imgUpload/**" location="/resources/imgUpload/" />
-	
+	<!-- multipartResolver를 빈에 등록해서 스프링컨트롤러가 파일을 받을 수 있도록 해줌 -->
+   <beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver"> 
+       <beans:property name="maxUploadSize" value="10485760"/> <!-- maxUploadSize : 최대 업로드 가능한 바이트 크기. 10485760은 1MB -->
+   </beans:bean>
+   
+
 	<context:component-scan base-package="com.spring.webprj" />
 	
 	

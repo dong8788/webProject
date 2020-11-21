@@ -102,11 +102,12 @@ public class ProductVo {
 	}
 	@Override
 	public String toString() {
-		return "ProductVo [prodSeq=" + prodSeq + ", sellerSeq=" + sellerSeq + ", category=" + category
-				+ ", prodName=" + prodName + ", prodInfo=" + prodInfo + ", price=" + price + ", discount=" + discount
+		return "ProductVo [prodSeq=" + prodSeq + ", sellerSeq=" + sellerSeq + ", category=" + category + ", prodName="
+				+ prodName + ", prodInfo=" + prodInfo + ", price=" + price + ", discount=" + discount
 				+ ", shippingCharge=" + shippingCharge + ", stockNumber=" + stockNumber + ", photoUrl=" + photoUrl
 				+ ", regDate=" + regDate + ", updateDate=" + updateDate + "]";
 	}
+	
 	
 	
 }

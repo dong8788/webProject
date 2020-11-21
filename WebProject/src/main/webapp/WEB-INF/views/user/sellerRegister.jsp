@@ -6,12 +6,42 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<!-- 합쳐지고 최소화된 최신 CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<!-- 부가적인 테마 -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	 	
+	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <title>Insert title here</title>
 </head>
+
+<script type="text/javascript">
+
+function fn_sellerIdChk(){
+	$.ajax({
+		url : "${pageContext.request.contextPath}/user/sellerIdChk",
+		type : "post",
+		dataType : "json",
+		data : {"id" : $("#id").val()},
+		success : function(data){
+			if(data == 1){
+				alert("중복된 아이디입니다");
+			} else if(data == 0){
+				$("#sellerIdChk").attr("value", "Y");
+				alert("사용가능한 아이디입니다.");
+			}
+		}
+	})
+}
+</script>
+
 <body>
 	<div style="max-width:70%;margin-top:250px;margin-left:auto;margin-right:auto">
 		<table style="width:400px;margin-left:auto;margin-right:auto">
-			<h4>회원가입</h4>
+			<h4>로그인</h4>
+			<table>
    				<form action="<c:url value='/user/sellerRegister'/>" method="post">
      			<tbody>
       				<tr style="height: 3em">
@@ -19,11 +49,13 @@
       				      <td><input type="text" name="businessName" placeholder="업체명" max="20" required="required"></td>
       				      <td></td>
       				</tr>
+      				<div>
 				    <tr style="height: 3em">
            				<td>사업자 번호</td>
- 				        <td><input type="text" name="businessNum" placeholder="사업자 번호" max="50" required="required"></td>
-						<td><button class="buisinessnumcheck" style="width: 100%; height: 100%;">중복확인</button></td>
+ 				        <td><input type="text" id="businessNum" name="businessNum" placeholder="사업자 번호" max="50" required="required"></td>
+         				<div class="check_font" id="businessNum_check"></div>
          			</tr>
+         			</div>
          			<tr style="height: 3em">
             			<td>판매자 이름</td>
             			<td><input type="text" name="name" placeholder="판매자 이름" max="20" required="required"></td>
@@ -31,8 +63,8 @@
          			</tr>
          			<tr style="height: 3em">
             			<td>아이디</td>
-            			<td><input type="text" name="id" placeholder="아이디" max="20" required="required"></td>
-            			<td><button class="idcheck" style="width: 100%; height: 100%;">중복확인</button></td>
+            			<td><input type="text" id="id" name="id" placeholder="아이디" max="20" required="required"></td>
+            			<td><button class="sellerIdChk" type="button" id="sellerIdChk" onclick="fn_sellerIdChk();" value="N" style="width: 100%; height: 100%;">중복확인</button></td>
          			</tr>
          			<tr style="height: 3em">
             			<td>비밀번호</td>

@@ -16,8 +16,8 @@ public class QueryServiceImpl implements QueryService {
 	private QueryDao queryDao;
 
 	@Override
-	public List<QueryVo> querySelectAll() {
-		return queryDao.querySelectAll();
+	public List<QueryVo> querySelectAll(int prodSeq) {
+		return queryDao.querySelectAll(prodSeq);
 	}
 
 	@Override

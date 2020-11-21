@@ -5,8 +5,8 @@
 <mapper namespace="QueryDao">
 
 	<!-- 제품상세페이지에 querySeq 순으로 제품문의 나열 -->
-	<select id="querySelectAll" resultType="QueryVo">
-		select * from QUERY order by QUERYSEQ
+	<select id="querySelectAll" parameterType="int" resultType="QueryVo">
+		select * from QUERY WHERE PRODSEQ=#{prodSeq} order by QUERYSEQ
 	</select>
 	
 	<!-- 고객이 로그인 상태일 때 마이페이지 제품문의 나열 -->

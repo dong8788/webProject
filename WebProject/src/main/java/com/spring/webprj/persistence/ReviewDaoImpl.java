@@ -15,8 +15,8 @@ public class ReviewDaoImpl implements ReviewDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	@Override
-	public List<ReviewVo> reviewSelectAll() {
-		return sqlSessionTemplate.selectList("ReviewDao.reviewSelectAll");
+	public List<ReviewVo> reviewSelectAll(int prodSeq) {
+		return sqlSessionTemplate.selectList("ReviewDao.reviewSelectAll", prodSeq);
 	}
 
 	@Override

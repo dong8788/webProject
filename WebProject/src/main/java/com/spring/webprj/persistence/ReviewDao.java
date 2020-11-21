@@ -6,7 +6,7 @@ import com.spring.webprj.domain.ReviewVo;
 
 public interface ReviewDao {
 	
-	public List<ReviewVo> reviewSelectAll();
+	public List<ReviewVo> reviewSelectAll(int prodSeq);
 	public ReviewVo reviewSelectOne(int seq);
 	public void reviewInsert(ReviewVo reviewVo);
 	public void reviewUpdate(ReviewVo reviewVo);

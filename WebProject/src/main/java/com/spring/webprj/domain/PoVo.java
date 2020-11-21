@@ -24,6 +24,9 @@ public class PoVo {
 	private Date fconfirmDate;
 	private Date RejectDate;
 	private String payMethod;
+	public PoVo() {
+		// TODO Auto-generated constructor stub
+	}
 	public int getPoNum() {
 		return poNum;
 	}

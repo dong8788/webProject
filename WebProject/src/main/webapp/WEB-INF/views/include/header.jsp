@@ -48,6 +48,7 @@
 						<nav class="navbar">
 						<c:if test="${seller1 == null}" >
 						<form action="<c:url value='/product/search'/>" method="get">
+							<input type="hidden" name="condition" value="전체">
 							<input type="text" class="form-control" name="keyword" id="keywordInput" placeholder="검색"/>
 							<button type="submit" class="fa fa-search" aria-hidden="true"></button>
 						</form>
@@ -62,9 +63,11 @@
 								<li class="checkout">
 									<a href="<c:url value='/mypage/cart'/>">
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-										<span id="checkout_items" class="checkout_items">
-										${cartSize }
-										</span>	
+										<c:if test='${cartSize!=null }'>
+											<span id="checkout_items" class="checkout_items">
+											${cartSize }
+											</span>	
+										</c:if>
 									</a>
 								</li>
 								</c:if>

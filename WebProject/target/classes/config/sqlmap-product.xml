@@ -3,6 +3,29 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="ProductDao">
+
+		<!-- 검색 변경 -->
+		<sql id="search">
+			<!-- 동적 SQL 구문 -->
+			<if test="condition == '전체'">
+				WHERE PRODNAME LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="condition == '패션'">
+				WHERE CATEGORY = '패션' AND PRODNAME LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="condition == '잡화'">
+				WHERE CATEGORY = '잡화' AND PRODNAME LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="condition == '뷰티'">
+				WHERE CATEGORY = '뷰티' AND PRODNAME LIKE '%' || #{keyword} || '%' 
+			</if>
+			<if test="condition == '주방'">
+				WHERE CATEGORY = '주방' AND PRODNAME LIKE '%' || #{keyword} || '%' 
+			</if>
+			<if test="condition == '가전디지털'">
+				WHERE CATEGORY = '가전디지털' AND PRODNAME LIKE '%' || #{keyword} || '%'
+			</if>
+		</sql>
 		
 	<insert id="insert" parameterType="ProductVo">
 		INSERT INTO PRODUCT 
@@ -10,9 +33,24 @@
 		VALUES (PRODSEQ.nextval, #{sellerSeq}, #{category}, #{prodName}, #{prodInfo}, #{price}, #{discount}, #{shippingCharge}, #{stockNumber}, #{photoUrl}) 
 	</insert>
 
-	<select id="list" resultType="ProductVo">
+	<select id="listBySellerSeq" resultType="ProductVo">
 		SELECT *
 		FROM PRODUCT WHERE SELLERSEQ=#{sellerSeq}
+	</select>
+
+	<select id="list" parameterType="SearchVO" resultType="ProductVo">
+		SELECT * FROM(
+		SELECT ROWNUM AS RNUM, a.* FROM (SELECT PRODSEQ, SELLERSEQ, CATEGORY, 
+		PRODNAME, PRODINFO, PRICE, DISCOUNT, SHIPPINGCHARGE, STOCKNUMBER, PHOTOURL FROM PRODUCT) a 
+		<include refid="search"/>
+		) WHERE RNUM between #{rowStart} and #{rowEnd}
+	</select>
+
+	<select id="listCount" parameterType="SearchVO" resultType="int">
+		
+		SELECT COUNT(*) FROM (
+		SELECT * FROM (SELECT ROWNUM AS RNUM, PRODSEQ, SELLERSEQ, CATEGORY, 
+		PRODNAME, PRODINFO, PRICE, DISCOUNT, SHIPPINGCHARGE, STOCKNUMBER, PHOTOURL FROM PRODUCT) <include refid="search"/>)
 	</select>
 
 	<select id="getProd" resultType="ProductVo">
@@ -23,8 +61,8 @@
 
 	<update id="update">
 		UPDATE PRODUCT
-		SET CATEGORY=#{category}, PRODNAME=#{prodName}, PRODINFO=#{prodInfo}, PRICE=#{price}, DISCOUNT=#{discount}, SHIPPINGCHARGE=#{shippingCharge}, STOCKNUMBER=#{stockNumber}
-		WHERE PRODUCTSEQ=#{productSeq} 
+		SET CATEGORY=#{category}, PRODNAME=#{prodName}, PRODINFO=#{prodInfo}, PRICE=#{price}, DISCOUNT=#{discount}, SHIPPINGCHARGE=#{shippingCharge}, STOCKNUMBER=#{stockNumber}, UPDATEDATE=SYSDATE
+		WHERE PRODSEQ=#{prodSeq}
 	</update>
 
 	<delete id="delete">

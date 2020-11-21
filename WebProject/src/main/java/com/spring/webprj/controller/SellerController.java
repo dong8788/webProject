@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,28 +58,23 @@ public class SellerController {
 	
 	@PostMapping("/prodWrite")
 	public String prodWrite(ProductVo prod, MultipartFile file) throws Exception {
-		String imgUploadPath = uploadPath;
-		String fileName = null;
-		System.out.println("post : prodwrite");
-		System.out.println(prod);
-		
-		if(file != null) {
-		fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes()); 
-	} else {
-//		fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
-		fileName = uploadPath + File.separator + "none.png";
-	}
-	
-		prod.setPhotoUrl(fileName);
-	
+		String imgUploadPath = uploadPath + File.separator + "imgUpload"; 
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath); String fileName = null;
+		if(file != null) { 
+			fileName = UploadFileUtils.fileUpload(imgUploadPath,file.getOriginalFilename(), file.getBytes(), ymdPath); 
+			} else { 
+				fileName = uploadPath + File.separator + "images" + File.separator + "none.png"; 
+			}
+			     
+		prod.setPhotoUrl(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 		prodservice.insert(prod);
-		
-		return "/seller/main";
+		System.out.println(prod);
+		return "redirect:/seller/prodList";
 	}
 	
 	@GetMapping("/prodList")
 	public void prodList(Model model, HttpSession session) {
-		List<ProductVo> prodList = prodservice.list(sellerservice.select(((SellerVo)session.getAttribute("login")).getId()).getSellerSeq());
+		List<ProductVo> prodList = prodservice.listBySellerSeq(sellerservice.select(((SellerVo)session.getAttribute("login")).getId()).getSellerSeq());
 		System.out.println("get : prodList");
 		System.out.println(prodList);
 		model.addAttribute("prodList", prodList);
@@ -87,7 +83,32 @@ public class SellerController {
 	@GetMapping("/prodModify/{prodSeq}")
 	public String prodModify(@PathVariable int prodSeq,Model model) {
 		model.addAttribute("prod", prodservice.getProd(prodSeq));
+		System.out.println(prodservice.getProd(prodSeq));
 		return "/seller/prodModify";
+	}
+
+	@PostMapping("/prodModify")
+	public String prodModify(ProductVo prod, MultipartFile file, HttpServletRequest req) throws Exception {
+		// 새로운 파일이 등록되었는지 확인
+	    if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+	    	// 기존 파일을 삭제(확인)
+	    	new File(uploadPath + req.getParameter("photoUrl")).delete();
+	         
+	        // 새로 첨부한 파일을 등록
+	        String imgUploadPath = uploadPath + File.separator + "imgUpload";
+	        String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+	        String fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+	         
+	        prod.setPhotoUrl(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+	         
+	      } else {  
+	    	 // 새로운 파일이 등록되지 않았다면 기존 이미지를 그대로 사용
+	         prod.setPhotoUrl(req.getParameter("photoUrl"));
+	      }
+
+		System.out.println(prod);
+		prodservice.update(prod);
+		return "redirect:/seller/prodList";
 	}
 	
 	@GetMapping("/newOrder")
@@ -117,21 +138,22 @@ public class SellerController {
 	@PostMapping("/send")
 	public String send(@RequestParam(value="poNum") List<Integer> poNumList,
 			@RequestParam(name="poStat") String poStat,
-			@RequestParam(name="courier") String courier,
-			@RequestParam(name="shippingNum") String shippingNum,
+			@RequestParam(name="courier") List<String> courierList,
+			@RequestParam(name="shippingNum") List<String> shippingNumList,
 			Model model, HttpSession session) {
 		System.out.println("post : send");
 		System.out.println(poStat);
 		System.out.println(poNumList);
 		
-		
+		int i = 0;
 		for(int poNum : poNumList) {
 			PoVo po = poservice.getPo(poNum);
 			po.setPoStat(poStat);
-			po.setCourier(courier);
-			po.setShippingNum(shippingNum);
+			po.setCourier(courierList.get(i));
+			po.setShippingNum(shippingNumList.get(i));
 			System.out.println(po);
 			poservice.update(po);
+			i++;
 		}
 		
 		return "/seller/send";
@@ -148,22 +170,24 @@ public class SellerController {
 	
 	@PostMapping("/sendStat")
 	public String sendStat(@RequestParam(value="poNum") List<Integer> poNumList,
-			@RequestParam(name="courier") String courier,
-			@RequestParam(name="shippingNum") String shippingNum,
+			@RequestParam(name="courier") List<String> courierList,
+			@RequestParam(name="shippingNum") List<String> shippingNumList,
 			Model model, HttpSession session) {
 		System.out.println("post : sendStat 수정");
 		System.out.println(poNumList);
 		
-		
+		int i = 0;
 		for(int poNum : poNumList) {
+			
 			PoVo po = poservice.getPo(poNum);
-			po.setCourier(courier);
-			po.setShippingNum(shippingNum);
+			po.setCourier(courierList.get(i));
+			po.setShippingNum(shippingNumList.get(i));
 			System.out.println(po);
 			poservice.update(po);
+			i++;
 		}
 		
-		return "/seller/sendStat";
+		return "redirect:/seller/sendStat";
 	}
 	
 	@GetMapping("/sendStat")

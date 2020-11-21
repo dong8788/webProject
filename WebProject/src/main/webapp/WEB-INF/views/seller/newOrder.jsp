@@ -56,37 +56,22 @@
 				<tbody align="center" style="height: 3em">
 				<c:forEach var="po" items="${newOrderList}" varStatus="loop">
 					<tr style="height: 3em">
-<<<<<<< HEAD
 						<td><input type="checkbox" name="poNum" value="${ po.poNum }" ></td>
 						<td>${ po.poNum }</td>
 						<td>${ po.prodName }</td>
 						<td>${ po.poQuantity }</td>
 						<td>${ po.poQuantity*(po.price - po.discount) }</td>
 						<td>신규주문</td>
-=======
-						<td><input type="checkbox" name="poNum" value="${ prod.poSeq }" ></td>
-						<td>${ po.poSeq }</td>
-						<td>${ po.prodName }</td>
-						<td>${ po.poQuantity }</td>
-						<td>${ po.poQuantity*(prod.price - prod.discount) }</td>
-						<td>${ po.poStat }</td>
->>>>>>> 1813d1c95dce4c2a3c4549daf4c83f396d31e0bb
 						<td>${ po.courier }</td>
 						<td>${ po.shippingNum }</td>
 					</tr>
 				</c:forEach>
 				</tbody>
 			</table>
-<<<<<<< HEAD
 			<div align="right"><button class="rejectBtn" type="submit">거절</button><button class="confirmBtn" type="submit">확인</button></div>
 			</form>
 		</div>
 		
-=======
-			</form>
-		</div>
-		<div><button class="rejectBtn" type="submit">거절</button><button class="confirmBtn" type="submit">확인</button></div>
->>>>>>> 1813d1c95dce4c2a3c4549daf4c83f396d31e0bb
 	</div>
 </body>
 

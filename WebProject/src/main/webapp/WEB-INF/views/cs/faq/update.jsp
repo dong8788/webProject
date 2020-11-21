@@ -33,7 +33,7 @@
 		<div class="table-wrapper" style="margin-left:250px;margin-top:200px;overflow-x:auto;max-width:70% ">
 		<h4>${noticeVo.getTitle()}</h4>
 		<hr>
-		<form action="${pageContext.request.contextPath}/cs/faq/update/${seq}" method="post">
+		<form action="${pageContext.request.contextPath}/cs/faq/update/${faqVo.getFaqSeq()}" method="post">
 		<input type="hidden" name="faqSeq" value="${faqVo.getFaqSeq()}">
 		<table style="width:70%">
 		<tr><th>분류</th>

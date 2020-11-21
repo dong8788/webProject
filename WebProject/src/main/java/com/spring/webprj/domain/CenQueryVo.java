@@ -1,13 +1,13 @@
 package com.spring.webprj.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class CenQueryVo {
 	
-private int cenQuerySeq;  //글번호
+	private int cenQuerySeq;  //글번호
 	
 	private String open; //비공개여부
 	private String queryType; //문의분류

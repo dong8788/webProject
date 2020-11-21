@@ -16,8 +16,8 @@ public class QueryDaoImpl implements QueryDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	@Override
-	public List<QueryVo> querySelectAll() {
-		return sqlSessionTemplate.selectList("QueryDao.querySelectAll");
+	public List<QueryVo> querySelectAll(int prodSeq) {
+		return sqlSessionTemplate.selectList("QueryDao.querySelectAll", prodSeq);
 	}
 
 	@Override

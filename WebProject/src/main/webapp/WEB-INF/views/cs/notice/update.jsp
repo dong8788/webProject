@@ -63,7 +63,7 @@
 			</td>
 		</tr>
 		</table>
-		<input type="submit" value="수정">
+		<div align="right"><button type="submit">수정</button></div>
 		</form>
 		</div>
 	</div>

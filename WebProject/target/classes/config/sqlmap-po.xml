@@ -15,7 +15,7 @@
 				REJECTDATE=SYSDATE, POSTAT=#{poStat}
 			</if>
 			<if test="poStat == 'ship'">
-				SHIPDATE=SYSDATE, POSTAT=#{poStat}
+				SHIPDATE=SYSDATE, POSTAT=#{poStat}, COURIER=#{courier}, SHIPPINGNUM=#{shippingNum}
 			</if>
 			<if test="poStat == 'shipsuccess'">
 				RECIPIENTDATE=SYSDATE, POSTAT=#{poStat}
@@ -26,7 +26,7 @@
 		</sql>
 
         <select id="list" resultType="PoProductVo">
-                select * from PURCHASEORDER po, PRODUCT prod WHERE po.PRODSEQ = prod.PRODSEQ AND po.CUSSEQ=#{cusSeq}
+                select * from PURCHASEORDER po, PRODUCT prod WHERE po.PRODSEQ = prod.PRODSEQ AND po.CUSSEQ=#{cusSeq}   
         </select>
 		<!-- 주문 조회 -->
         <select id="getPo" parameterType="int" resultType="PoVo">
@@ -61,7 +61,7 @@
 
         <!-- PO상태 변경 --> 
         <update id="update" parameterType="PoVo">
-                UPDATE PURCHASEORDER set <include refid="poStatCh"/>
+                UPDATE PURCHASEORDER set <include refid="poStatCh"/> 
                 where PONUM=#{poNum}
         </update>
 
