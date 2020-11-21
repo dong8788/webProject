@@ -44,15 +44,9 @@
 				</tfoot>
 			</table>
 			<hr>
-			<a href="<c:url value="/cs/cenquery"/>">목록</a>
-			<c:if test="${seller1 != null }">
-				<c:if test="${login.sellerSeq == cenquery.sellerSeq }">
-					<a href="<c:url value="/cs/notice/update/${noticeVo.getNoticeSeq()}"/>">수정</a>
-					<a href="<c:url value="/cs/notice/delete/${noticeVo.getNoticeSeq()}"/>">삭제</a>
-				</c:if>
-			</c:if>
+			<a href="<c:url value="/cs/notice"/>">목록</a>
 			<c:if test="${seller1 == null }">
-				<c:if test="${login.cusSeq == cenquery.cusSeq }">
+				<c:if test="${login.cusId == 'admin' }">
 					<a href="<c:url value="/cs/notice/update/${noticeVo.getNoticeSeq()}"/>">수정</a>
 					<a href="<c:url value="/cs/notice/delete/${noticeVo.getNoticeSeq()}"/>">삭제</a>
 				</c:if>

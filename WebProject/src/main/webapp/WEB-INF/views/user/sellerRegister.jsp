@@ -39,23 +39,20 @@ function fn_sellerIdChk(){
 
 <body>
 	<div style="max-width:70%;margin-top:250px;margin-left:auto;margin-right:auto">
-		<table style="width:400px;margin-left:auto;margin-right:auto">
 			<h4>로그인</h4>
-			<table>
-   				<form action="<c:url value='/user/sellerRegister'/>" method="post">
+   			<form action="<c:url value='/user/sellerRegister'/>" method="post">
+			<table style="width:400px;margin-left:auto;margin-right:auto">
      			<tbody>
       				<tr style="height: 3em">
       				      <td>업체명</td>
       				      <td><input type="text" name="businessName" placeholder="업체명" max="20" required="required"></td>
       				      <td></td>
       				</tr>
-      				<div>
 				    <tr style="height: 3em">
            				<td>사업자 번호</td>
  				        <td><input type="text" id="businessNum" name="businessNum" placeholder="사업자 번호" max="50" required="required"></td>
-         				<div class="check_font" id="businessNum_check"></div>
+         				<td class="check_font" id="businessNum_check"></td>
          			</tr>
-         			</div>
          			<tr style="height: 3em">
             			<td>판매자 이름</td>
             			<td><input type="text" name="name" placeholder="판매자 이름" max="20" required="required"></td>
@@ -100,8 +97,8 @@ function fn_sellerIdChk(){
             			<td colspan="3" align="right"><input type="submit" value="가입하기"></td>
          			</tr>
       			</tbody>
-   			</form>
 		</table>
+   		</form>
 	</div>
 </body>
 </html>
