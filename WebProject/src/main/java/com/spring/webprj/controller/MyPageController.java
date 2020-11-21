@@ -18,6 +18,7 @@ import com.spring.webprj.domain.PoProductVo;
 import com.spring.webprj.domain.QueryProductVo;
 import com.spring.webprj.service.CartService;
 import com.spring.webprj.service.PoService;
+import com.spring.webprj.service.ProductService;
 import com.spring.webprj.service.QueryService;
 
 @Controller
@@ -32,6 +33,9 @@ public class MyPageController {
 	
 	@Autowired
 	private QueryService queryservice;
+	
+	@Autowired
+	private ProductService prodservice;
 	
 	
 	@GetMapping("/main")
@@ -119,6 +123,20 @@ public class MyPageController {
 			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
 			model.addAttribute("cartSize", cartSize);
 			return "mypage/prodquery";
+		}
+	}
+	
+	@GetMapping("/reviewWrite/{prodSeq}")
+	public String reviewWrite(@PathVariable int prodSeq, HttpSession session, RedirectAttributes ra, Model model) {
+		if(session.getAttribute("login")==null) {
+			ra.addFlashAttribute("msg", "not-login");
+			return "redirect:/";
+		} else {
+			System.out.println("mypage:prodquery " + ((CustomerVo)session.getAttribute("login")).getCusSeq());
+			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
+			model.addAttribute("cartSize", cartSize);
+			model.addAttribute("product", prodservice.getProd(prodSeq));
+			return "mypage/reviewWrite";
 		}
 	}
 }

@@ -33,6 +33,28 @@
 		</property>
 	</bean>
 	
+	<!-- gmail -->
+    <bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="username" value="이메일주소@gmail.com" />
+        <property name="password" value="aksenek3" />
+       
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.auth">true</prop>
+            </props>
+        </property>
+       
+    </bean>
+    
+    <bean id="email" class="com.spring.webprj.common.Email"></bean>
+    <bean id="emailSender" class="com.spring.webprj.common.EmailSender"></bean>
+	
+	
+	
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactoryBean"/>
 	</bean>

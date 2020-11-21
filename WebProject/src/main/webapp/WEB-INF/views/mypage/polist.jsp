@@ -62,10 +62,11 @@
 							<td></td>
 						</c:if>
 						<c:if test="${poProduct.courier != null}">
+							<td>배송중</td>
 							<td>${ poProduct.courier }</td>
 							<td>${ poProduct.shippingNum}</td>
 						</c:if>
-						<td><button onclick="location.href='<c:url value="/po/review/${poProduct.prodSeq}"/>'">입력</button></td>
+						<td><button onclick="location.href='<c:url value="/mypage/reviewWrite/${poProduct.prodSeq}"/>'">입력</button></td>
 						
 					</tr>
 				</c:forEach>

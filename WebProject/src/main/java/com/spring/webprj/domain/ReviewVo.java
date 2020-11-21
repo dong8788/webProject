@@ -5,7 +5,7 @@ import java.util.Date;
 public class ReviewVo {
 
 	private int reviewSeq;
-	private String prodId;
+	private int prodSeq;
 	private String cusId;
 	private int score;
 	private String title;
@@ -18,11 +18,11 @@ public class ReviewVo {
 	public void setReviewSeq(int reviewSeq) {
 		this.reviewSeq = reviewSeq;
 	}
-	public String getProdId() {
-		return prodId;
+	public int getProdSeq() {
+		return prodSeq;
 	}
-	public void setProdId(String prodId) {
-		this.prodId = prodId;
+	public void setProdSeq(int prodId) {
+		this.prodSeq = prodSeq;
 	}
 	public String getCusId() {
 		return cusId;
@@ -56,7 +56,7 @@ public class ReviewVo {
 	}
 	@Override
 	public String toString() {
-		return "ReviewVo [reviewSeq=" + reviewSeq + ", prodId=" + prodId + ", cusId=" + cusId + ", title=" + title
+		return "ReviewVo [reviewSeq=" + reviewSeq + ", prodSeq=" + prodSeq + ", cusId=" + cusId + ", title=" + title
 				+ ", content=" + content + ", regDate=" + regDate + "]";
 	}
 	

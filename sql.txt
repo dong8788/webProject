@@ -110,12 +110,12 @@ create sequence "CART_SEQ" start with 1 increment by 1 NOMAXVALUE NOCYCLE;
 create sequence "REVIEWSEQ" start with 1 increment by 1 maxvalue 99999;
 
 create table "REVIEW"(
-	"REVIEWSEQ"	number primary key,
-	"PONUM"	number
-	"SCORE"		number		NOT NULL,
-	"TITLE"		varchar2(50)	NOT NULL,
-	"CONTENT"	varchar2(500)	NOT NULL,
-	"REGDATE"	DATE DEFAULT 	sysdate
+   "REVIEWSEQ"   number primary key,
+   "RPODSEQ"   number,
+   "CUSID"      VARCHAR2(50)     NOT NULL,
+   "TITLE"      varchar2(50)   NOT NULL,
+   "CONTENT"   varchar2(500)   NOT NULL,
+   "REGDATE"   DATE DEFAULT    sysdate
 );
 
 
