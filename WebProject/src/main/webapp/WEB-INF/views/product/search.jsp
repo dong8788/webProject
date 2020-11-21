@@ -36,12 +36,12 @@
 							<h5>Product Category</h5>
 						</div>
 						<ul class="sidebar_categories">
-							<li class="active"><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>전체</a></li>
-							<li><a href="#">패션</a></li>
-							<li><a href="#">잡화</a></li>
-							<li><a href="#">뷰티</a></li>
-							<li><a href="#">주방</a></li>
-							<li><a href="#">가전디지털</a></li>
+							<li <c:if test="${param.condition == '전체' }">class="active"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span</c:if>><a href="#">전체</a></li>
+							<li <c:if test="${param.condition == '패션' }">class="active"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span</c:if>><a href="#">패션</a></li>
+							<li <c:if test="${param.condition == '잡화' }">class="active"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span</c:if>><a href="#">잡화</a></li>
+							<li <c:if test="${param.condition == '뷰티' }">class="active"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span</c:if>><a href="#">뷰티</a></li>
+							<li <c:if test="${param.condition == '주방' }">class="active"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span</c:if>><a href="#">주방</a></li>
+							<li <c:if test="${param.condition == '가전디지털' }">class="active"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span</c:if>><a href="#">가전디지털</a></li>
 						</ul>
 					</div>
 
@@ -143,7 +143,7 @@
 										<div class="product-item men">
 											<div class="product discount product_filter">
 												<div class="product_image">
-													<img src="images/product_1.png" alt="">
+													<img src="${pageContext.request.contextPath}/${ product.photoUrl }" alt="" style="height: 230px">
 												</div>
 												<div class="favorite favorite_left"></div>
 												<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-${ product.discount}</span></div>
@@ -161,15 +161,15 @@
 								<div align="center">
 									
 								    <c:if test="${pageMaker.prev}">
-								    	<a href="<c:url value='/product/search/${pageMaker.makeQuery(pageMaker.startPage - 1)}'/>">이전</a>&nbsp;
+								    	<a href="<c:url value='/product/search/${pageMaker.makeSearch(pageMaker.startPage - 1)}'/>">이전</a>&nbsp;
 								    </c:if> 
 								    
 									<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-									    <a href="<c:url value='/product/search/${pageMaker.makeQuery(idx)}'/>">${idx}</a>&nbsp;
+									    <a href="<c:url value='/product/search/${pageMaker.makeSearch(idx)}'/>">${idx}</a>&nbsp;
 								    </c:forEach>
 								
 									<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-									    <a href="<c:url value='/product/search/${pageMaker.makeQuery(pageMaker.endPage + 1)}'/>">다음</a>
+									    <a href="<c:url value='/product/search/${pageMaker.makeSearch(pageMaker.endPage + 1)}'/>">다음</a>
 								   	</c:if> 
 
 								</div>

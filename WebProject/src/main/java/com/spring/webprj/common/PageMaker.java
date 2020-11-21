@@ -1,5 +1,8 @@
 package com.spring.webprj.common;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 //https://melonpeach.tistory.com/27 참고
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -72,4 +75,37 @@ public class PageMaker {
 		   
 		return uriComponents.toUriString();
 	}
+	
+	public String makeSearch(int page)
+	{
+	  
+	 UriComponents uriComponents =
+	            UriComponentsBuilder.newInstance()
+	            .queryParam("page", page)
+	            .queryParam("perPageNum", cri.getPerPageNum())
+	            .queryParam("condition", ((SearchVO)cri).getCondition())
+	            .queryParam("keyword", encoding(((SearchVO)cri).getKeyword()))
+	            .build(); 
+	    return uriComponents.toUriString();  
+	}
+
+	private String encoding(String keyword) {
+		if(keyword == null || keyword.trim().length() == 0) { 
+			return "";
+		}
+		 
+		try {
+			return URLEncoder.encode(keyword, "UTF-8");
+		} catch(UnsupportedEncodingException e) { 
+			return ""; 
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "PageMaker [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", prev="
+				+ prev + ", next=" + next + ", displayPageNum=" + displayPageNum + ", cri=" + cri + "]";
+	}
+	
+	
 }

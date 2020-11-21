@@ -59,15 +59,15 @@
 				<div align="center">
 					
 				    	<c:if test="${pageMaker.prev}">
-				    		<a href="<c:url value='/cs/cenquery/${pageMaker.makeQuery(pageMaker.startPage - 1)}'/>">이전</a>&nbsp;
+				    		<a href="<c:url value='/cs/cenquery/${pageMaker.makeSearch(pageMaker.startPage - 1)}'/>">이전</a>&nbsp;
 				    	</c:if> 
 				
 					    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-					    	<a href="<c:url value='/cs/cenquery/${pageMaker.makeQuery(idx)}'/>">${idx}</a>&nbsp;
+					    	<a href="<c:url value='/cs/cenquery/${pageMaker.makeSearch(idx)}'/>">${idx}</a>&nbsp;
 				    	</c:forEach>
 				
 					    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-					    	<a href="<c:url value='/cs/cenquery/${pageMaker.makeQuery(pageMaker.endPage + 1)}'/>">다음</a>
+					    	<a href="<c:url value='/cs/cenquery/${pageMaker.makeSearch(pageMaker.endPage + 1)}'/>">다음</a>
 				   	 	</c:if> 
 				  	
 				</div>

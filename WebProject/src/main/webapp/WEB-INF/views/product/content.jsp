@@ -18,7 +18,7 @@
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
 						<li><a href="index.html">Home</a></li>
-						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Single Product</a></li>
+						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>${product.category }</a></li>
 					</ul>
 				</div>
 
@@ -32,13 +32,13 @@
 						<div class="col-lg-3 thumbnails_col order-lg-1 order-2">
 							<div class="single_product_thumbnails">
 								<ul>
-									<li><img src="${pageContext.request.contextPath}/resources/${productVo.photoUrl}" alt="" data-image="${pageContext.request.contextPath}/resources/${productVo.photoUrl}"></li>
+									<li><img src="${pageContext.request.contextPath}/${ product.photoUrl }" alt="" data-image="${pageContext.request.contextPath}/${ product.photoUrl }"></li>
 								</ul>
 							</div>
 						</div>
 						<div class="col-lg-9 image_col order-lg-2 order-1">
 							<div class="single_product_image">
-								<div class="single_product_image_background" style="background-image:url(${pageContext.request.contextPath}/resources/${productVo.photoUrl})"></div>
+								<div class="single_product_image_background" style="background-image:url(${pageContext.request.contextPath}/${ product.photoUrl })"></div>
 							</div>
 						</div>
 					</div>
@@ -86,9 +86,13 @@
 						<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
 						<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
 					</div>
-					<div>
-						<div class="red_button shop_now_button"><button>shop now</button></div>
-					</div>
+					<form id="poForm" action="<c:url value='/product/po'/>" method="get">
+						<input type="hidden" name="prodSeq" value="${product.prodSeq}">
+						<input id="poQuantity" type="hidden" name="poQuantity" value="">
+						<div>
+							<div class="red_button shop_now_button"><button type="submit" style="border: 0;outline: 0;background: #fe4c50">shop now</button></div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -170,8 +174,8 @@
 									</table>
 									<c:if test="${login != null}" >
 										<form action="<c:url value='/product/query'/>" method="post">
-										<input type="hidden" name="prodId" value="1">
-										<input type="hidden" name="cusId" value="${login.cusId }">
+										<input type="hidden" name="prodSeq" value="${productVo.prodSeq }">
+										<input type="hidden" name="cusId" value="${login.cusSeq }">
 										<div style="margin-left:auto;margin-right:auto;width:50%">
 											<div style="margin-top:50px">
 												<br>
@@ -254,13 +258,13 @@
 												</c:if>
 											</ul>
 										</div>
-									</div>
 									<div class="review">
 										<div class="review_date">${review.regDate }</div>
 										<div class="user_name">${ review.cusId }</div>
 										<p>${review.content }</p>
 									</div>
 									</c:forEach>
+									</div>
 								</div>
 									
 							</div>
@@ -300,10 +304,15 @@
 
 				</div>
 			</div>
-		</div>
-
-	</div>
 </body>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+$( "#poForm" ).submit(function(event){
+	var value = $('#quantity_value');
+    console.log('이벤트 발생');
+    $('#poQuantity').attr('value', parseInt(value.text()));
+});
+</script>
 <script src="<c:url value='/js/jquery-3.2.1.min.js'/>"></script>
 <script src="<c:url value='/styles/bootstrap4/popper.js'/>"></script>
 <script src="<c:url value='/styles/bootstrap4/bootstrap.min.js'/>"></script>

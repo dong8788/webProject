@@ -99,6 +99,31 @@ public class CsController {
 		
 		return "cs/cenquery/view";
 	}
+	
+	@GetMapping("/cenquery/update/{cenQuerySeq}")
+	public String cenqueryUpdate(@PathVariable int cenQuerySeq, HttpSession session, Model model) {
+		if(session.getAttribute("seller1") == null && session.getAttribute("login") != null) {
+			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
+			model.addAttribute("cartSize", cartSize);
+		}
+		
+		model.addAttribute("cenquery", cenQueryservice.read(cenQuerySeq));
+		
+		return "cs/cenquery/update";
+	}
+	
+	@PostMapping("/cenquery/update")
+	public String cenqueryUpdate(CenQueryVo cenquery, HttpSession session, Model model) {
+		if(session.getAttribute("seller1") == null && session.getAttribute("login") != null) {
+			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
+			model.addAttribute("cartSize", cartSize);
+		}
+		
+		System.out.println(cenquery);
+		cenQueryservice.update(cenquery);
+		
+		return "redirect:/cs/cenquery";
+	}
 
 	//FAQ
 	@GetMapping("/faq")

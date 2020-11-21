@@ -7,7 +7,7 @@ import com.spring.webprj.domain.QueryVo;
 
 public interface QueryService {
 
-	public List<QueryVo> querySelectAll();
+	public List<QueryVo> querySelectAll(int prodSeq);
 	public List<QueryProductVo> querySelectBySeq(int cusSeq);
 	public List<QueryProductVo> querySelectBysellerSeq(int sellerSeq);
 	public QueryProductVo prodquerySelectOne(int querySeq);

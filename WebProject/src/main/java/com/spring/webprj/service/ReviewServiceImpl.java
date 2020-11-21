@@ -15,9 +15,9 @@ public class ReviewServiceImpl implements ReviewService {
 	private ReviewDao reviewDao;
 	
 	@Override
-	public List<ReviewVo> reviewSelectAll() {
+	public List<ReviewVo> reviewSelectAll(int prodSeq) {
 		System.out.println("review:selectAll");
-		return reviewDao.reviewSelectAll();
+		return reviewDao.reviewSelectAll(prodSeq);
 	}
 
 	@Override

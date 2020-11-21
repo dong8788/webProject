@@ -26,7 +26,7 @@
 		</sql>
 
         <select id="list" resultType="PoProductVo">
-                select * from PURCHASEORDER po, PRODUCT prod WHERE po.PRODSEQ = prod.PRODSEQ AND po.CUSSEQ=#{cusSeq}
+                select * from PURCHASEORDER po, PRODUCT prod WHERE po.PRODSEQ = prod.PRODSEQ AND po.CUSSEQ=#{cusSeq}   
         </select>
 		<!-- 주문 조회 -->
         <select id="getPo" parameterType="int" resultType="PoVo">

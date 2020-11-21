@@ -4,19 +4,28 @@
     
 <mapper namespace="ProductDao">
 
-	<sql id="search">
-		<!-- 동적 SQL 구문 -->
-		<if test="condition == 'writer'">
-			AND cenquery.TITLE LIKE CONCAT('%', #{keyword}, '%')
-		</if>
-		<if test="condition == 'content'">
-			AND cenquery.CONTENT LIKE CONCAT('%', #{keyword}, '%')
-		</if>
-		<if test="condition == 'reply'">
-			AND cenquery.REPLY LIKE CONCAT('%', #{keyword}, '%')
-		</if>
-	</sql>
-
+		<!-- 검색 변경 -->
+		<sql id="search">
+			<!-- 동적 SQL 구문 -->
+			<if test="condition == '전체'">
+				WHERE PRODNAME LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="condition == '패션'">
+				WHERE CATEGORY = '패션' AND PRODNAME LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="condition == '잡화'">
+				WHERE CATEGORY = '잡화' AND PRODNAME LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="condition == '뷰티'">
+				WHERE CATEGORY = '뷰티' AND PRODNAME LIKE '%' || #{keyword} || '%' 
+			</if>
+			<if test="condition == '주방'">
+				WHERE CATEGORY = '주방' AND PRODNAME LIKE '%' || #{keyword} || '%' 
+			</if>
+			<if test="condition == '가전디지털'">
+				WHERE CATEGORY = '가전디지털' AND PRODNAME LIKE '%' || #{keyword} || '%'
+			</if>
+		</sql>
 		
 	<insert id="insert" parameterType="ProductVo">
 		INSERT INTO PRODUCT 
@@ -30,14 +39,18 @@
 	</select>
 
 	<select id="list" parameterType="SearchVO" resultType="ProductVo">
-		SELECT * FROM (SELECT ROWNUM AS RNUM, PRODSEQ, SELLERSEQ, CATEGORY, 
+		SELECT * FROM(
+		SELECT ROWNUM AS RNUM, a.* FROM (SELECT PRODSEQ, SELLERSEQ, CATEGORY, 
 		PRODNAME, PRODINFO, PRICE, DISCOUNT, SHIPPINGCHARGE, STOCKNUMBER, PHOTOURL FROM PRODUCT) a 
-		WHERE RNUM between #{rowStart} and #{rowEnd} 
+		<include refid="search"/>
+		) WHERE RNUM between #{rowStart} and #{rowEnd}
 	</select>
 
 	<select id="listCount" parameterType="SearchVO" resultType="int">
 		
-		SELECT COUNT(*) FROM (SELECT * FROM PRODUCT)
+		SELECT COUNT(*) FROM (
+		SELECT * FROM (SELECT ROWNUM AS RNUM, PRODSEQ, SELLERSEQ, CATEGORY, 
+		PRODNAME, PRODINFO, PRICE, DISCOUNT, SHIPPINGCHARGE, STOCKNUMBER, PHOTOURL FROM PRODUCT) <include refid="search"/>)
 	</select>
 
 	<select id="getProd" resultType="ProductVo">

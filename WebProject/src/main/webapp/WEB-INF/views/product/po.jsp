@@ -13,39 +13,63 @@
 		결제 내역<br>
 		<br>
 		<form action="<c:url value='/product/po'/>" method="post">
-		제품 명 : 점퍼<br>
-		상품 가격 : 10,000원<br>
-		배송비 : 2,500원<br>
-		총 결제 금액 : 12,500원<br>
+			<input type="hidden" name="prodSeq" value="${product.prodSeq }">
+			<input type="hidden" name="poQuantity" value="${ poQuantity }">
+			<input type="hidden" name="cusSeq" value="${login.cusSeq }">
+			<input type="hidden" name="billingAmount" value="${(product.price + product.shippingCharge -product.discount)*poQuantity }">
+			<input type="hidden" name="poStat" value="newOrder">
+		<table>
+			<tr>
+				<td>제품 명</td><td>${ product.prodName }</td>
+			<tr>
+			<tr>
+				<td>상품 가격</td><td>${ product.price - product.discount }원</td>
+			<tr>
+				<td>배송비</td><td>${product.shippingCharge }</td>
+			</tr>
+			<tr>
+				<td>구매 수량</td><td>${poQuantity }개</td>
+			</tr>
+			<tr>
+				<td>총 결제 금액 </td><td>${(product.price + product.shippingCharge -product.discount)*poQuantity }</td>
+			</tr>
+		</table>
 		<br><br>
 		배송 정보<br>
-		
-			<input type="hidden" name="prodSeq" value=26>
-			<input type="hidden" name="poQuantity" value=1>
-			<input type="hidden" name="payNum" value=1>
-			<input type="hidden" name="cusSeq" value="${login.cusSeq }">
-			<input type="hidden" name="billingAmount" value=12500>
-			<input type="hidden" name="poStat" value="newOrder">
-			
-			수령인 : <input type="text" name="recipient" ><br>
-			수령인 연락처 : <input type="text" name="recipientPhone" ><br>
-			배송지 주소 : <input type="text" name="recipientAddr" ><br>
-			배송지 메모 : <input type="text" name="shipMemo" ><br><br>
+		<table>
+			<tr>
+				<td>수령인</td><td><input type="text" name="recipient" ></td>
+			</tr>
+			<tr>
+				<td>수령인 연락처</td><td><input type="text" name="recipientPhone" ></td>
+			</tr>
+			<tr>
+				<td>배송지 주소</td><td><input type="text" name="recipientAddr" ></td>
+			</tr>
+			<tr>
+				<td>배송지 메모</td><td><input type="text" name="shipMemo" ></td>
+			</tr>
+		</table>
 			<br><br>
 			결제 수단<br>
-			<ul>
-		    	<li>
+		<table>
+			<tr>
+		    	<td colspan="2">
 		        	<input type="radio" name="payMethod" value="easyaccount" checked>계좌 간편 결제
-		    	</li>
-		    	<li>
+		    	</td>
+		    </tr>
+		    <tr>
+		    	<td colspan="2">
 		        	<input type="radio" name="payMethod" value="easycard">카드 간편 결제
-		      	</li>
-		      	<li>
+		      	</td>
+		    </tr>
+		    <tr>
+		      	<td colspan="2">
 		      		<input type="radio" name="payMethod" value="normal">일반 결제
-		      	</li>
-   			</ul>
+		      	</td>
+   			</tr>
+   		</table>
 			<input type="submit" value="결제하기">
-		
 		</form>
 	</div>
 

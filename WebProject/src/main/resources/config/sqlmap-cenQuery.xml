@@ -62,7 +62,7 @@
 
 	<update id="update" parameterType="CenQueryVo">
 		UPDATE CENQUERY
-		SET QUERYTYPE=#{queryType}, CONTENT=#{content}, TITLE=#{title}, REPLY=#{reply}
+		SET QUERYTYPE=#{queryType}, CONTENT=#{content}, TITLE=#{title}, REPLY=#{reply, jdbcType=VARCHAR}
 		WHERE CENQUERYSEQ=#{cenQuerySeq} 
 	</update>
 
