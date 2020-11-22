@@ -242,6 +242,8 @@ public class UserController {
         
         String dicestr = String.valueOf(dice);
         
+        System.out.println(dicestr);
+        
         return dicestr;
 	}
 	

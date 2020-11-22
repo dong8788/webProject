@@ -136,5 +136,27 @@ public class PoController {
 		model.addAttribute("pageMaker", pm);
 		return "product/search";
 	}
+	
+	@GetMapping("/map")
+	public String map(HttpSession session, Model model, SearchVO search) {
+		System.out.println("get : search");
+		if(session.getAttribute("login") != null) {
+			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
+			model.addAttribute("cartSize", cartSize);
+		}
+		PageMaker pm = new PageMaker();
+		pm.setCri(search);
+		System.out.println(search.getRowStart());
+		System.out.println("parameter(페이지번호) : "+search.getPage());
+		System.out.println("검색 조건 : "+ search.getCondition());
+		System.out.println("검색어 : "+ search.getKeyword());
+		System.out.println("rowStart : "+ search.getRowStart());
+		System.out.println("rowEnd : "+ search.getRowEnd());
+		pm.setTotalCount(prodservice.listCount(search));
+		model.addAttribute("prodList", prodservice.list(search));
+		System.out.println(prodservice.list(search));
+		model.addAttribute("pageMaker", pm);
+		return "product/map";
+	}
 
 }

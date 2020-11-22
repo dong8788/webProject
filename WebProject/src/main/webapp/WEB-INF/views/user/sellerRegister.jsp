@@ -14,11 +14,9 @@
 	 	
 	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-		<script src="/resources/js/addressapi.js"></script>
 
 <title>Insert title here</title>
 </head>
-
 <script type="text/javascript">
 
 function execPostCode() {
@@ -57,12 +55,14 @@ function execPostCode() {
                 $("[name=addr1]").val(data.zonecode);
                 $("[name=addr2]").val(fullRoadAddr);
                 
-                
+               
             }
          }).open();
 
 }
 
+let chk1 = false, chk2 = false;
+var chk3;
 function fn_sellerIdChk(){
 	$.ajax({
 		url : "${pageContext.request.contextPath}/user/sellerIdChk",
@@ -75,10 +75,14 @@ function fn_sellerIdChk(){
 			} else if(data == 0){
 				$("#sellerIdChk").attr("value", "Y");
 				alert("사용가능한 아이디입니다.");
+				chk1 = true;
+			}
+			if(chk1&&chk2){
+				$('#submitBtn').removeAttr('disabled');
 			}
 		}
 	})
-}
+};
 
 function fn_emailChk(){
 	$.ajax({
@@ -87,11 +91,29 @@ function fn_emailChk(){
 		dataType : "json",
 		data : {"email" : $("#email").val()},
 		success : function(data){
-			
+			console.log(data);
+			chk3 = data;
 		}
-	})
-}
+	});
+};
+
+function fn_authkeyChk(){
+	if($('#authkey').val() == chk3){
+		alert("인증되었습니다.")
+		chk2 = true;
+	}else{
+		alert("인증번호를 다시 확인하세요")
+	}
+	if(chk1&&chk2){
+		$('#submitBtn').removeAttr('disabled');
+	}
+	
+	
+};
+
 </script>
+
+
 
 <body>
 	<div style="max-width:70%;margin-top:250px;margin-left:auto;margin-right:auto">
@@ -155,15 +177,15 @@ function fn_emailChk(){
          			<tr style="height: 3em">
             			<td>이메일</td>
             			<td><input id="email" type="email" name="email" placeholder="이메일" max="20" required="required"></td>
-            			<td><button class="authkey" type="button" id="emailChk" onclick="fn_emailChk();" value="N" style="width: 100%; height: 100%;">인증번호 받기</button></td>
+            			<td><button class="authkey" type="button" id="emailChk" onclick="fn_emailChk();" style="width: 100%; height: 100%;">인증번호 받기</button></td>
          			</tr>
         			<tr style="height: 3em">
             			<td>인증번호</td>
-            			<td><input type="text" name="authkey" placeholder="인증번호" max="20" required="required"></td>
-            			<td><button class="authkey-confirm" style="width: 100%; height: 100%">인증확인</button></td>
+            			<td><input type="text" id="authkey" name="authkey" placeholder="인증번호" max="20" required="required"></td>
+            			<td><button class="authkey" type="button" id="authkeyChk" onclick="fn_authkeyChk();" style="width: 100%; height: 100%;">인증확인</button></td>
          			</tr>
          			<tr style="height: 3em">
-            			<td colspan="3" align="right"><input type="submit" value="가입하기"></td>
+            			<td colspan="3" align="right"><input id="submitBtn" type="submit" value="가입하기"></td>
          			</tr>
       			</tbody>
 		</table>
@@ -171,10 +193,12 @@ function fn_emailChk(){
 	</div>
 </body>
 </html>
+
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
 $( "#registerForm" ).submit(function(event){
     $('#address').val(addr1.value + addr2.value + addr3.value);
 });
 </script>
+
 <jsp:include page="../include/footer.jsp" />

@@ -36,7 +36,7 @@
 			</div>
 		</div>
 		<div class="table-wrapper" style="margin-left:250px;margin-top:200px;margin-bottom:300px;overflow-x:auto;max-width:70% ">
-			<h4>상품 등록</h4>
+			<h4>상품 수정</h4>
 			<br><br>
 			<form action="${pageContext.request.contextPath}/seller/prodModify" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="sellerSeq" value="${ login.sellerSeq }">
@@ -63,7 +63,7 @@
    					<td>제품사진</td>
    					<td>
    						<input type="file" id="photoUrl" name="file" />
-					 	<div class="select_img"><img src="${pageContext.request.contextPath}/${ prod.photoUrl }" /></div>
+					 	<div class="select_img"><img src="${pageContext.request.contextPath}/${ prod.photoUrl }" style="height: 100px;width: 100px"/></div>
 					 </td>
 				</tr>
 				<tr>
