@@ -24,93 +24,63 @@
 			</div>
 		</div>
 		<div class="table-wrapper" style="margin-left:250px;margin-top:200px;overflow-x:auto;max-width:70% ">
-		<h4>공지사항</h4>
-			<table style="width:100%">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Description</th>
-						<th>Price</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Item 1</td>
-						<td>Ante turpis integer aliquet porttitor.</td>
-						<td>29.99</td>
-					</tr>
-					<tr>
-						<td>Item 2</td>
-						<td>Vis ac commodo adipiscing arcu aliquet.</td>
-						<td>19.99</td>
-					</tr>
-					<tr>
-						<td>Item 3</td>
-						<td> Morbi faucibus arcu accumsan lorem.</td>
-						<td>29.99</td>
-					</tr>
-					<tr>
-						<td>Item 4</td>
-						<td>Vitae integer tempus condimentum.</td>
-						<td>19.99</td>
-					</tr>
-					<tr>
-						<td>Item 5</td>
-						<td>Ante turpis integer aliquet porttitor.</td>
-						<td>29.99</td>
-					</tr>
-				</tbody>
-				<tfoot>
-					<tr>
-						<td colspan="2"></td>
-						<td>100.00</td>
-					</tr>
-				</tfoot>
-			</table>
+			<div>
+			<h4>공지사항</h4>
+				<table style="width:100%">
+					<thead align="center" >
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성자</th>					
+							<th>작성일</th>					
+							<th>조회수</th>								
+						</tr>
+					</thead>
+					<tbody align="center">
+					<c:forEach var="notice" items="${noticeList}" varStatus="loop" begin="0" end="4">
+						<tr style="height: 2em">
+							<td>${notice.noticeSeq}</td>
+							<td>
+							<a href="<c:url value="/cs/notice/view/${notice.getNoticeSeq()}"/>">
+								${notice.title}</a>
+							</td>
+							<td>운영자</td>
+							<td>${notice.regDate}</td>
+							<td></td>
+						</tr>
+					</c:forEach>
+					</tbody>
+				</table>
+			</div>
 			<br><br><br><br>
+			<div>
 			<h4>FAQ</h4>
-			<table style="width:100%">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Description</th>
-						<th>Price</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Item 1</td>
-						<td>Ante turpis integer aliquet porttitor.</td>
-						<td>29.99</td>
-					</tr>
-					<tr>
-						<td>Item 2</td>
-						<td>Vis ac commodo adipiscing arcu aliquet.</td>
-						<td>19.99</td>
-					</tr>
-					<tr>
-						<td>Item 3</td>
-						<td> Morbi faucibus arcu accumsan lorem.</td>
-						<td>29.99</td>
-					</tr>
-					<tr>
-						<td>Item 4</td>
-						<td>Vitae integer tempus condimentum.</td>
-						<td>19.99</td>
-					</tr>
-					<tr>
-						<td>Item 5</td>
-						<td>Ante turpis integer aliquet porttitor.</td>
-						<td>29.99</td>
-					</tr>
-				</tbody>
-				<tfoot>
-					<tr>
-						<td colspan="2"></td>
-						<td>100.00</td>
-					</tr>
-				</tfoot>
-			</table>
+				<table style="width:100%">
+					<thead align="center">
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성자</th>					
+							<th>작성일</th>					
+							<th>조회수</th>								
+						</tr>
+					</thead>
+					<tbody align="center">
+					<c:forEach var="faq" items="${faqList}" varStatus="loop" begin="0" end="4">
+						<tr style="height: 2em">
+							<td>${faq.faqSeq}</td>
+							<td>
+								<a href="<c:url value="/cs/faq/view/${faq.getFaqSeq()}"/>">
+								${faq.query}</a>
+							</td>
+							<td>운영자</td>
+							<td>${faq.regDate}</td>
+							<td></td>
+						</tr>
+					</c:forEach>
+					</tbody>
+				</table>
+			</div>	
 		</div>
 	</div>
 </body>
