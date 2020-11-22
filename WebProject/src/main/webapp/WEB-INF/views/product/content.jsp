@@ -38,7 +38,7 @@
 						</div>
 						<div class="col-lg-9 image_col order-lg-2 order-1">
 							<div class="single_product_image">
-								<div class="single_product_image_background" style="background-image:url(${pageContext.request.contextPath}/${ product.photoUrl })"></div>
+								<div class="single_product_image_background"><img src="${pageContext.request.contextPath}/${ product.photoUrl }" alt="" data-image="${pageContext.request.contextPath}/${ product.photoUrl }" style="width: 100%;height:100%"></div>
 							</div>
 						</div>
 					</div>

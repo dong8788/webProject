@@ -80,6 +80,13 @@ public class SellerController {
 		model.addAttribute("prodList", prodList);
 	}
 	
+	@GetMapping("/prodView/{prodSeq}")
+	public String prodView(@PathVariable int prodSeq,Model model) {
+		model.addAttribute("prod", prodservice.getProd(prodSeq));
+		System.out.println(prodservice.getProd(prodSeq));
+		return "/seller/prodView";
+	}
+	
 	@GetMapping("/prodModify/{prodSeq}")
 	public String prodModify(@PathVariable int prodSeq,Model model) {
 		model.addAttribute("prod", prodservice.getProd(prodSeq));
@@ -101,6 +108,14 @@ public class SellerController {
 
 		System.out.println(prod);
 		prodservice.update(prod);
+		return "redirect:/seller/prodList";
+	}
+	
+	@PostMapping("/prodDelete/{prodSeq}")
+	public String prodDelete(@PathVariable int prodSeq) throws Exception {
+		// 새로운 파일이 등록되었는지 확인
+
+		prodservice.delete(prodSeq);;
 		return "redirect:/seller/prodList";
 	}
 	

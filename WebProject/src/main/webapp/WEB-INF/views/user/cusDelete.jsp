@@ -10,15 +10,18 @@
 </head>
 <body>
 	<div style="max-width:70%;margin-top:250px;margin-left:auto;margin-right:auto">
-		<table style="width:250px;margin-left:auto;margin-right:auto">
+		<table style="width:400px;margin-left:auto;margin-right:auto">
 
 				<h4>회원 탈퇴</h4>
 				<tbody>
 					<form id="loginForm" action="<c:url value='/user/cusDelete'/>" method="post">
 					<tr>	
-						<td><input type="password" name="password" placeholder="암호를 입력하세요" max="20"></td>
+						<td><input type="password" name="password" placeholder="암호를 입력하세요" max="20" style="width: 100%"></td>
 						<td><input type="submit" value="탈퇴" style="width:100%"></td>
-						<td><input type="checkbox" required="required">탈퇴에 동의합니다.</td>
+
+					</tr>
+					<tr>
+						<td colspan="2"><input type="checkbox" required="required">탈퇴에 동의합니다.</td>
 					</tr>
 					</form>
 				</tbody>

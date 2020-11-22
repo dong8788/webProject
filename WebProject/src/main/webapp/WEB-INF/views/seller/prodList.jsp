@@ -54,7 +54,7 @@
 				<c:forEach var="prod" items="${prodList}" varStatus="loop">
 					<tr style="height: 3em">
 						<td>${ prod.prodSeq }</td>
-						<td>${ prod.prodName }</td>
+						<td><a href="<c:url value='/seller/prodView/${prod.prodSeq }'/>">${ prod.prodName }</a></td>
 						<td>${ prod.price }</td>
 						<td>${ prod.discount }</td>
 						<td>${ prod.shippingCharge }</td>

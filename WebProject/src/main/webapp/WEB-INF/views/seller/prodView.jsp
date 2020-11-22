@@ -36,11 +36,8 @@
 			</div>
 		</div>
 		<div class="table-wrapper" style="margin-left:250px;margin-top:200px;margin-bottom:300px;overflow-x:auto;max-width:70% ">
-			<h4>상품 수정</h4>
+			<h4>상품 상세페이지</h4>
 			<br><br>
-			<form action="${pageContext.request.contextPath}/seller/prodModify" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="sellerSeq" value="${ login.sellerSeq }">
-			<input type="hidden" name="prodSeq" value="${ prod.prodSeq }">
 			<table style="width:100%;" border="1">
 				<tr>
 					<td>카테고리</td>
@@ -68,27 +65,26 @@
 				</tr>
 				<tr>
 					<td>제품정보</td>
-					<td><textarea name="prodInfo" >${ prod.prodInfo }</textarea></td>
+					<td><textarea name="prodInfo" readonly="readonly">${ prod.prodInfo }</textarea></td>
 				</tr>
 				<tr>
 					<td>가격</td>
-					<td><input type="text" name="price" value="${ prod.price }"></td>
+					<td><input type="text" name="price" value="${ prod.price }"  readonly="readonly"></td>
 				</tr>
 				<tr>
 					<td>할인가격</td>
-					<td><input type="text" name="discount" value="${ prod.discount }"></td>
+					<td><input type="text" name="discount" value="${ prod.discount }"  readonly="readonly"></td>
 				</tr>
 				<tr>
 					<td>배송비</td>
-					<td><input type="text" name="shippingCharge" value="${ prod.shippingCharge }"></td>
+					<td><input type="text" name="shippingCharge" value="${ prod.shippingCharge }" readonly="readonly"></td>
 				</tr>
 				<tr>
 					<td>재고수량</td>
-					<td><input type="text" name="stockNumber" value="${ prod.stockNumber }"></td>
+					<td><input type="text" name="stockNumber" value="${ prod.stockNumber }" readonly="readonly"></td>
 				</tr>
 			</table>
-			<input type="submit" value="수정"><button onclick="locaion.href='<c:url value="/seller/prodDelete/${prod.prodSeq}"/>'">삭제</button>
-			</form>
+			<button onclick="locaion.href='<c:url value="/seller/prodModify/${prod.prodSeq}"/>'">수정</button>
 		</div>
 	</div>
 </body>
