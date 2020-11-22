@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,7 +18,6 @@ import com.spring.webprj.common.PageMaker;
 import com.spring.webprj.common.SearchVO;
 import com.spring.webprj.domain.CenQueryVo;
 import com.spring.webprj.domain.CustomerVo;
-
 import com.spring.webprj.domain.FaqVo;
 import com.spring.webprj.domain.NoticeVo;
 import com.spring.webprj.service.CartService;
@@ -59,7 +57,6 @@ public class CsController {
 		System.out.println("검색어 : "+ search.getKeyword());
 		System.out.println("rowStart : "+ search.getRowStart());
 		System.out.println("rowEnd : "+ search.getRowEnd());
-		System.out.println(search);
 		
 		List<CenQueryVo> cenQueryList = cenQueryservice.list(search);
 		pm.setTotalCount(cenQueryservice.listCount(search));
@@ -69,60 +66,6 @@ public class CsController {
 		model.addAttribute("pageMaker", pm);
 		
 		return "cs/cenquery";
-	}
-	
-	@GetMapping("/cenquery/write")
-	public String cenqueryWrite(HttpSession session, Model model) {
-		if(session.getAttribute("seller1") == null && session.getAttribute("login") != null) {
-			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
-			model.addAttribute("cartSize", cartSize);
-		}
-		
-		return "cs/cenquery/write";
-	}
-	
-	@PostMapping("/cenquery/write")
-	public String cenqueryWrite(CenQueryVo cenquery) {
-		System.out.println(cenquery);
-		cenQueryservice.insert(cenquery);
-		return "redirect:/cs/cenquery";
-	}
-	
-	@GetMapping("/cenquery/view/{cenQuerySeq}")
-	public String cenqueryView(@PathVariable int cenQuerySeq, HttpSession session, Model model) {
-		if(session.getAttribute("seller1") == null && session.getAttribute("login") != null) {
-			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
-			model.addAttribute("cartSize", cartSize);
-		}
-		
-		model.addAttribute("cenquery", cenQueryservice.read(cenQuerySeq));
-		
-		return "cs/cenquery/view";
-	}
-	
-	@GetMapping("/cenquery/update/{cenQuerySeq}")
-	public String cenqueryUpdate(@PathVariable int cenQuerySeq, HttpSession session, Model model) {
-		if(session.getAttribute("seller1") == null && session.getAttribute("login") != null) {
-			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
-			model.addAttribute("cartSize", cartSize);
-		}
-		
-		model.addAttribute("cenquery", cenQueryservice.read(cenQuerySeq));
-		
-		return "cs/cenquery/update";
-	}
-	
-	@PostMapping("/cenquery/update")
-	public String cenqueryUpdate(CenQueryVo cenquery, HttpSession session, Model model) {
-		if(session.getAttribute("seller1") == null && session.getAttribute("login") != null) {
-			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
-			model.addAttribute("cartSize", cartSize);
-		}
-		
-		System.out.println(cenquery);
-		cenQueryservice.update(cenquery);
-		
-		return "redirect:/cs/cenquery";
 	}
 
 	//FAQ
@@ -143,38 +86,85 @@ public class CsController {
 		pm.setTotalCount(faqservice.listCount(search));
 		model.addAttribute("faqList", faqservice.selectAll(search));
 		model.addAttribute("pageMaker", pm);
-
 		return "cs/faq/list";
 	}
 	@GetMapping("/faq/view/{seq}")
-	public String faqView(Model model, @PathVariable int seq) {
+	public String faqView(Model model, HttpSession session, @PathVariable int seq) {
+		if(session.getAttribute("seller1") == null && session.getAttribute("login") != null) {
+			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
+			model.addAttribute("cartSize", cartSize);
+		}
 		FaqVo faqVo = faqservice.select(seq);
 		model.addAttribute("faqVo", faqVo);
 		return "cs/faq/view";
 	}
 	@GetMapping("/faq/insert")
-	public String faqInsert(Model model) {
-		model.addAttribute("faqVo", new FaqVo());
-		return "cs/faq/insert";
+	public String faqInsert(Model model, HttpSession session) {
+		if(session.getAttribute("seller1") == null && session.getAttribute("login") != null) {
+			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
+			model.addAttribute("cartSize", cartSize);
+		}
+		CustomerVo customerVo = (CustomerVo)session.getAttribute("login");
+		if(session.getAttribute("seller1") == null &&
+				customerVo.getCusId().equals("admin")){
+			model.addAttribute("faqVo", new FaqVo());
+			return "cs/faq/insert";
+		} else {
+			return "redirect:/cs/faq";
+		}
 	}
 	@PostMapping("/faq/insert")
-	public String faqInsert(FaqVo faqVo) {
+	public String faqInsert(Model model, HttpSession session, FaqVo faqVo) {
+		if(session.getAttribute("seller1") == null && session.getAttribute("login") != null) {
+			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
+			model.addAttribute("cartSize", cartSize);
+		}
 		faqservice.insert(faqVo);
 		return "redirect:/cs/faq";
 	}
 	@GetMapping("/faq/delete/{seq}")
-	public String faqDelete(Model model, @PathVariable int seq) {
-		faqservice.delete(seq);
-		return "cs/faq/delete";
+	public String faqDelete(Model model, HttpSession session, @PathVariable int seq) {
+		CustomerVo customerVo = (CustomerVo)session.getAttribute("login");
+		if(session.getAttribute("seller1") == null && session.getAttribute("login") != null) {
+			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
+			model.addAttribute("cartSize", cartSize);
+		}
+		if(session.getAttribute("login") == null) {
+			return "redirect:/cs/faq";
+		}
+		if(session.getAttribute("seller1") == null &&
+				customerVo.getCusId().equals("admin")){
+			faqservice.delete(seq);
+			return "cs/faq/delete";
+		} else {
+			return "redirect:/cs/faq";
+		}
 	}
 	@GetMapping("/faq/update/{seq}")
-	public String faqUpdate(Model model, @PathVariable int seq) {
-		FaqVo faqVo = faqservice.select(seq);
-		model.addAttribute("faqVo", faqVo);
-		return "cs/faq/update";
+	public String faqUpdate(Model model, HttpSession session, @PathVariable int seq) {
+		CustomerVo customerVo = (CustomerVo)session.getAttribute("login");
+		if(session.getAttribute("seller1") == null && session.getAttribute("login") != null) {
+			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
+			model.addAttribute("cartSize", cartSize);
+		}
+		if(session.getAttribute("login") == null) {
+			return "redirect:/cs/faq";
+		}
+		if(session.getAttribute("seller1") == null &&
+				customerVo.getCusId().equals("admin")){
+			FaqVo faqVo = faqservice.select(seq);
+			model.addAttribute("faqVo", faqVo);
+			return "cs/faq/update";
+		} else {
+			return "redirect:/cs/faq";
+		}
 	}
 	@PostMapping("/faq/update/{seq}")
-	public String faqUpdate(FaqVo faqVo, @PathVariable int seq) {
+	public String faqUpdate(FaqVo faqVo, Model model, HttpSession session, @PathVariable int seq) {
+		if(session.getAttribute("seller1") == null && session.getAttribute("login") != null) {
+			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
+			model.addAttribute("cartSize", cartSize);
+		}
 		System.out.println("updated faqVo : " + faqVo);
 		faqservice.update(faqVo);
 		return "redirect:/cs/faq";
@@ -200,7 +190,6 @@ public class CsController {
 		pm.setTotalCount(noticeservice.listCount(search));
 		model.addAttribute("noticeList", noticeservice.selectAll(search));
 		model.addAttribute("pageMaker", pm);
-
 		return "cs/notice/list";
 	}
 	@GetMapping("/notice/view/{seq}")
@@ -287,13 +276,11 @@ public class CsController {
 	//공지사항 끝
 	
 	@GetMapping("/main")
-	public String main(HttpSession session, Model model, SearchVO search){
+	public String main(HttpSession session, Model model){
 		if(session.getAttribute("seller1") == null && session.getAttribute("login") != null) {
 			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
 			model.addAttribute("cartSize", cartSize);
 		}
-		model.addAttribute("noticeList", noticeservice.selectAll(search));
-		model.addAttribute("faqList", faqservice.selectAll(search));
 		return "cs/support";
 	}
 
