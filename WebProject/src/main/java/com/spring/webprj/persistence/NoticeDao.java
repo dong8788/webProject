@@ -24,4 +24,7 @@ public interface NoticeDao {
 	
 	//공지사항 수정 기능
 	public void update(NoticeVo notice);
+	
+	//공지사항 조회수 갱신 기능
+	public void updateReadCount(int noticeSeq);
 }

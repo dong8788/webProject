@@ -36,7 +36,7 @@
 			</div>
 		</div>
 			<div class="table-wrapper" style="margin-left:250px;margin-top:200px;margin-bottom:300px;overflow-x:auto;max-width:70% ">
-			<h4>발송 처리</h4>
+			<h4>배송현황</h4>
 			<br><br>
 			<form name="frmJoin" onSubmit="return CheckForm(this)" action="<c:url value='/seller/sendStat'/>" method="post">
 			<input type="hidden" class="poStat" name="poStat" value="">

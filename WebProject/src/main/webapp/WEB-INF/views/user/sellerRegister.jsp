@@ -144,12 +144,13 @@ function fn_authkeyChk(){
          			</tr>
          			<tr style="height: 3em">
             			<td>비밀번호</td>
-            			<td><input type="password" name="password" placeholder="비밀번호" max="20" required="required"></td>
+            			<td><input type="password" id="password" name="password" placeholder="비밀번호" max="20" required="required"></td>
             			<td></td>
          			</tr>
          			<tr style="height: 3em">
             			<td>비밀번호 확인</td>
-            			<td><input type="password" name="passwordCheck" placeholder="비밀번호 확인" max="20" required="required"></td>
+            			<td><input type="password" id="passwordCheck" name="passwordCheck" placeholder="비밀번호 확인" max="20" required="required"></td>
+            			<td style="vertical-align: middle;"><font id="chkNotice" size="1"></font></td>
             			<td></td>
          			</tr>
          			<tr style="height: 3em">
@@ -198,6 +199,27 @@ function fn_authkeyChk(){
 <script>
 $( "#registerForm" ).submit(function(event){
     $('#address').val(addr1.value + addr2.value + addr3.value);
+});
+</script>
+
+<script type="text/javascript">
+
+$(function(){
+    $('#password').keyup(function(){
+      $('#chkNotice').html('');
+    });
+
+    $('#passwordCheck').keyup(function(){
+
+        if($('#password').val() != $('#passwordCheck').val()){
+          $('#chkNotice').html('비밀번호 일치하지 않음<br><br>');
+          $('#chkNotice').attr('color', '#f82a2aa3');
+        } else{
+          $('#chkNotice').html('비밀번호 일치함<br><br>');
+          $('#chkNotice').attr('color', '#199894b3');
+        }
+
+    });
 });
 </script>
 

@@ -33,7 +33,7 @@ public class QueryVo {
 	public int getCusSeq() {
 		return cusSeq;
 	}
-	public void setCusId(int cusSeq) {
+	public void setCusSeq(int cusSeq) {
 		this.cusSeq = cusSeq;
 	}
 	public String getTitle() {

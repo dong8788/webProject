@@ -174,8 +174,8 @@
 									</table>
 									<c:if test="${login != null}" >
 										<form action="<c:url value='/product/query'/>" method="post">
-										<input type="hidden" name="prodSeq" value="${productVo.prodSeq }">
-										<input type="hidden" name="cusId" value="${login.cusSeq }">
+										<input type="hidden" name="prodSeq" value="${product.prodSeq }">
+										<input type="hidden" name="cusSeq" value="${login.cusSeq }">
 										<div style="margin-left:auto;margin-right:auto;width:50%">
 											<div style="margin-top:50px">
 												<br>

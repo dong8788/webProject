@@ -28,8 +28,8 @@
 	</select>
 	
 	<insert id="queryInsert" parameterType="QueryVo">
-		insert into QUERY (QUERYSEQ, OPEN, PRODID, CUSID, TITLE, CONTENT)
-		values (QUERYSEQ.nextval, #{open}, #{prodId}, #{cusId}, #{title}, #{content})
+		insert into QUERY (QUERYSEQ, OPEN, PRODSEQ, CUSSEQ, TITLE, CONTENT)
+		values (QUERYSEQ.nextval, #{open}, #{prodSeq}, #{cusSeq}, #{title}, #{content})
 	</insert>
 	
 	<update id="queryUpdate" parameterType="QueryVo">

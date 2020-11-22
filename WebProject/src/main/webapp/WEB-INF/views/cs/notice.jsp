@@ -43,7 +43,7 @@
 								<td>${notice.title}</td>
 								<td>운영자</td>
 								<td>${notice.regDate}</td>
-								<td></td>
+								<td>${notice.readCount}</td>
 							</tr>
 						</c:forEach>
 						</tbody>

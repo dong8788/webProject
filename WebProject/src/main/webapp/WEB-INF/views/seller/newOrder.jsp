@@ -36,7 +36,7 @@
 			</div>
 		</div>
 		<div class="table-wrapper" style="margin-left:250px;margin-top:200px;margin-bottom:300px;overflow-x:auto;max-width:70% ">
-			<h4>판매자 메인페이지</h4>
+			<h4>신규주문</h4>
 			<br><br>
 			<form action="<c:url value='/seller/newOrder'/>" method="post">
 			<input type="hidden" class="poStat" name="poStat" value="">

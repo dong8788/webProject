@@ -112,7 +112,7 @@ public class PoController {
 		System.out.println("post: query");
 		System.out.println(query);
 		queryService.queryInsert(query);
-		return "redirect:/product/content";
+		return "redirect:/product/content/"+query.getProdSeq();
 	}
 	
 	@GetMapping("/search")

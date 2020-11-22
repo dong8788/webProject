@@ -24,4 +24,7 @@ public interface NoticeService {
 	
 	//공지사항 수정 기능
 	public void update(NoticeVo notice);
+	
+	//공지사항 수정 기능
+	public void updateReadCount(int noticeSeq);
 }

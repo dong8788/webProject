@@ -209,6 +209,7 @@ public class CsController {
 			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
 			model.addAttribute("cartSize", cartSize);
 		}
+		noticeservice.updateReadCount(seq);
 		NoticeVo noticeVo = noticeservice.selectBySeq(seq);
 		model.addAttribute("noticeVo", noticeVo);
 		return "cs/notice/view";

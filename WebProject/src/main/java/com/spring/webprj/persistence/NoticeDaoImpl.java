@@ -34,19 +34,21 @@ public class NoticeDaoImpl implements NoticeDao {
 	@Override
 	public void delete(int noticeSeq) {
 		sqlSessionTemplate.delete("NoticeDao.delete", noticeSeq);
-
 	}
 
 	@Override
 	public void insert(NoticeVo notice) {
 		sqlSessionTemplate.insert("NoticeDao.insert", notice);
-
 	}
 
 	@Override
 	public void update(NoticeVo notice) {
-		// TODO Auto-generated method stub
+		sqlSessionTemplate.update("NoticeDao.update", notice);
+	}
 
+	@Override
+	public void updateReadCount(int noticeSeq) {
+		sqlSessionTemplate.update("NoticeDao.updateCount", noticeSeq);
 	}
 
 }

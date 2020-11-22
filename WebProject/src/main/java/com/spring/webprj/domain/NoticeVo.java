@@ -15,6 +15,14 @@ public class NoticeVo {
 	private String content;
 	private String title;
 	private Date regDate;
+	private int readCount;
+	
+	public int getReadCount() {
+		return readCount;
+	}
+	public void setReadCount(int readCount) {
+		this.readCount = readCount;
+	}
 	public int getNoticeSeq() {
 		return noticeSeq;
 	}
