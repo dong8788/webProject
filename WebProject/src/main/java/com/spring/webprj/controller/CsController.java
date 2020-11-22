@@ -287,11 +287,13 @@ public class CsController {
 	//공지사항 끝
 	
 	@GetMapping("/main")
-	public String main(HttpSession session, Model model){
+	public String main(HttpSession session, Model model, SearchVO search){
 		if(session.getAttribute("seller1") == null && session.getAttribute("login") != null) {
 			int cartSize = cartservice.select(((CustomerVo)session.getAttribute("login")).getCusSeq()).size();
 			model.addAttribute("cartSize", cartSize);
 		}
+		model.addAttribute("noticeList", noticeservice.selectAll(search));
+		model.addAttribute("faqList", faqservice.selectAll(search));
 		return "cs/support";
 	}
 
